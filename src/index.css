@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@300;400;500;600;700&display=swap');
+
+/* ─── Globals ─────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Instrument Sans', sans-serif;
+  background: #ffffff;
+  color: #2E2C29;
+  overflow-x: hidden;
+  /* Hide system cursor — custom cursor handles it */
+  cursor: none !important;
+}
+
+/* Ensure cursor none propagates */
+*, a, button, [data-cursor] {
+  cursor: none !important;
+}
+
+::selection { background: #2E2C29; color: #fff; }
+
+/* ─── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(46,44,41,0.18); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(46,44,41,0.35); }
+
+/* ─── Utilities ───────────────────────────────────────────────────────────── */
+.serif { font-family: 'Instrument Serif', serif; }
+
+/* ─── Responsive containers ───────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  /* Work grid → 2 cols */
+  .work-grid { grid-template-columns: 1fr 1fr !important; }
+  /* Selected work → 1 col */
+  .home-work-grid { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 600px) {
+  .work-grid { grid-template-columns: 1fr !important; }
+  .home-work-grid { grid-template-columns: 1fr !important; }
+}
