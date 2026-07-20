@@ -1035,27 +1035,38 @@ function Footer() {
               variants={fadeUp}
               style={{ display: "flex", flexDirection: "column", gap: 6 }}
             >
-              {["Linkedin", "Dribbble"].map((link) => (
-                <a
-                  key={link}
-                  href="#"
-                  data-cursor
-                  style={{
-                    fontFamily: "Instrument Sans, sans-serif",
-                    fontWeight: 700,
-                    fontSize: "clamp(22px, 3vw, 42px)",
-                    letterSpacing: "-0.04em",
-                    color: "#2E2C29",
-                    lineHeight: 1.1,
-                    textDecoration: "none",
-                    transition: "opacity 0.2s",
-                  }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.45")}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-                >
-                  {link} ↗
-                </a>
-              ))}
+              {["Linkedin", "Dribbble"].map((link) => {
+                const href =
+                  link === "Linkedin"
+                    ? "https://www.linkedin.com"
+                    : "https://dribbble.com";
+                return (
+                  <a
+                    key={link}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link}
+                    data-cursor
+                    style={{
+                      fontFamily: "Instrument Sans, sans-serif",
+                      fontWeight: 700,
+                      fontSize: "clamp(22px, 3vw, 42px)",
+                      letterSpacing: "-0.04em",
+                      color: "#2E2C29",
+                      lineHeight: 1.1,
+                      textDecoration: "none",
+                      transition: "opacity 0.2s",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.opacity = "0.45")
+                    }
+                    onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+                  >
+                    {link} ↗
+                  </a>
+                );
+              })}
             </motion.div>
           </div>
           <motion.div
