@@ -81,6 +81,8 @@ export const ALL_PROJECTS: Project[] = [
     outcome:
       "The project was delivered as a polished Figma system with reusable components and a clear handoff path for product development.",
     tools: ["Figma"],
+    liveUrl: "https://www.kapuli.ai/",
+    thumbImage: "/travel-planner-thumb.png",
     figmaLinks: [
       {
         label: "Mobile app",
@@ -140,6 +142,7 @@ export const ALL_PROJECTS: Project[] = [
     outcome:
       "The design was presented as a scalable interface system with a clean web experience that could grow with future product needs.",
     tools: ["Figma"],
+    thumbImage: "/library system thumb.png",
     figmaLinks: [
       {
         label: "Web app design",
@@ -234,6 +237,7 @@ export const ALL_PROJECTS: Project[] = [
     outcome:
       "The project was delivered as a complete Figma experience complete with brand direction and an e-commerce-ready website flow.",
     tools: ["Figma", "Adobe Illustrator"],
+    thumbImage: "/neo-creative-thumb.png",
     figmaLinks: [
       {
         label: "Design",
@@ -269,6 +273,7 @@ export const ALL_PROJECTS: Project[] = [
     outcome:
       "The work was delivered as a simple yet polished web design concept ready for further development.",
     tools: ["Figma"],
+    thumbImage: "/taste-of-heaven-thumb.png",
     figmaLinks: [
       {
         label: "Design",
@@ -338,6 +343,7 @@ export const ALL_PROJECTS: Project[] = [
     outcome:
       "The work was shaped into a polished mobile concept with a strong brand-led experience and clear interaction patterns.",
     tools: ["Figma"],
+    thumbImage: "/screens/salon-zero.png",
     figmaLinks: [
       {
         label: "Design",
@@ -484,7 +490,6 @@ export const SKILL_CATEGORIES = [
     label: "Frontend",
     items: [
       "React",
-      "React Native",
       "Next.js",
       "TypeScript",
       "Angular",

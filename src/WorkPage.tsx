@@ -63,6 +63,7 @@ function WorkCard({ project, index }: { project: Project; index: number }) {
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const [hovered, setHovered] = useState(false);
   const navigate = useNavigate();
+  const hasCover = !!(project.thumbImage || project.bgImage);
 
   return (
     <motion.div
@@ -88,6 +89,7 @@ function WorkCard({ project, index }: { project: Project; index: number }) {
           position: "relative",
           borderRadius: 20,
           overflow: "hidden",
+          height: 280,
           background: project.bg,
           boxShadow: hovered
             ? "0 26px 60px rgba(0,0,0,0.16)"
@@ -95,7 +97,29 @@ function WorkCard({ project, index }: { project: Project; index: number }) {
           transition: "box-shadow 0.3s ease",
         }}
       >
-        <ProjectThumbnail project={project} height={280} />
+        {hasCover ? (
+          <motion.img
+            src={project.thumbImage || project.bgImage}
+            alt={project.title}
+            animate={{ scale: hovered ? 1.04 : 1 }}
+            transition={{ duration: 0.6, ease: easeOut }}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "top center",
+              display: "block",
+            }}
+          />
+        ) : (
+          <motion.div
+            animate={{ scale: hovered ? 1.03 : 1 }}
+            transition={{ duration: 0.6, ease: easeOut }}
+            style={{ height: "100%" }}
+          >
+            <ProjectThumbnail project={project} height={280} />
+          </motion.div>
+        )}
 
         <motion.div
           animate={{ opacity: hovered ? 1 : 0 }}

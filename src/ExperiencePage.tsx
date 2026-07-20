@@ -92,7 +92,6 @@ const skillCategories = [
     label: "Frontend",
     items: [
       "React",
-      "React Native",
       "Next.js",
       "TypeScript",
       "Angular",
@@ -471,7 +470,7 @@ export default function ExperiencePage() {
                 color: "#2E2C29",
               }}
             >
-              Senior UI/UX Engineer bridging design and code for 4+ years.
+              UI/UX Engineer bridging design and code for 4+ years.
             </h1>
             <p
               style={{

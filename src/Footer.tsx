@@ -218,7 +218,7 @@ export default function Footer() {
             color: "#4A4A4A",
           }}
         >
-          Design by Kushani Devendra · Senior UI/UX Engineer
+          Design by Kushani Devendra · UI/UX Engineer
         </span>
       </div>
     </footer>

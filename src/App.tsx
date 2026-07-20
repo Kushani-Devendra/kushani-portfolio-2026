@@ -17,7 +17,7 @@ import Footer from "./Footer";
 import {
   ALL_PROJECTS,
   FEATURED_PROJECTS,
-  SKILL_CATEGORIES,
+  SKILLS,
   CLIENTS,
   Project,
 } from "./data";
@@ -904,7 +904,6 @@ function SkillsSection() {
         ref={ref}
         style={{ display: "flex", gap: 80, alignItems: "flex-start" }}
       >
-        {/* Left label */}
         <motion.div
           initial={{ opacity: 0, x: -24 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -919,74 +918,40 @@ function SkillsSection() {
             paddingTop: 12,
           }}
         >
-          Skills
+          Focus
         </motion.div>
-
-        {/* Right: skill categories */}
         <div style={{ flex: 1 }}>
-          {SKILL_CATEGORIES.map((category, ci) => (
+          {SKILLS.map((skill, i) => (
             <motion.div
-              key={category.label}
+              key={skill}
               initial={{ opacity: 0, x: 28 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: ci * 0.1, ease: easeOut }}
+              transition={{ duration: 0.6, delay: i * 0.075, ease: easeOut }}
               style={{
                 borderTop: "1px solid rgba(0,0,0,0.07)",
-                padding: "22px 0",
+                padding: "16px 0",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
             >
-              {/* Category label */}
-              <div
+              <span
                 style={{
                   fontFamily: "Instrument Sans, sans-serif",
-                  fontSize: 11,
                   fontWeight: 700,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "#9FA0A3",
-                  marginBottom: 12,
+                  fontSize: "clamp(36px, 5vw, 72px)",
+                  letterSpacing: "-0.04em",
+                  color: "#2E2C29",
+                  lineHeight: 1.05,
+                  transition: "color 0.2s",
+                  cursor: "default",
                 }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#C8B89A")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#2E2C29")}
               >
-                {category.label}
-              </div>
-              {/* Skill pills */}
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                {category.items.map((skill, si) => (
-                  <motion.span
-                    key={skill}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={inView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{
-                      duration: 0.4,
-                      delay: ci * 0.1 + si * 0.04,
-                      ease: easeOut,
-                    }}
-                    style={{
-                      fontFamily: "Instrument Sans, sans-serif",
-                      fontWeight: 500,
-                      fontSize: 14,
-                      letterSpacing: "-0.01em",
-                      color: "#2E2C29",
-                      background: "#F5F4F0",
-                      border: "1px solid rgba(0,0,0,0.07)",
-                      borderRadius: 99,
-                      padding: "7px 16px",
-                      cursor: "default",
-                      transition: "background 0.2s, color 0.2s",
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLSpanElement).style.background = "#2E2C29";
-                      (e.currentTarget as HTMLSpanElement).style.color = "#fff";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLSpanElement).style.background = "#F5F4F0";
-                      (e.currentTarget as HTMLSpanElement).style.color = "#2E2C29";
-                    }}
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
-              </div>
+                {skill}
+              </span>
+              <span style={{ fontSize: 20, color: "#9FA0A3" }}>↗</span>
             </motion.div>
           ))}
           <div style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }} />
