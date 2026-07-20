@@ -13,10 +13,11 @@ import ProjectPage from "./ProjectPage";
 import NotFoundPage from "./NotFoundPage";
 import { ProjectThumbnail } from "./ProjectThumbnail";
 import ExperiencePage from "./ExperiencePage";
+import Footer from "./Footer";
 import {
   ALL_PROJECTS,
   FEATURED_PROJECTS,
-  SKILLS,
+  SKILL_CATEGORIES,
   CLIENTS,
   Project,
 } from "./data";
@@ -260,9 +261,7 @@ function Hero() {
               maxWidth: 620,
             }}
           >
-            Working across design systems, SaaS products, and frontend code —
-            turning scattered requirements into structured, purposeful screens
-            that ship.
+            I design systems, build SaaS products, and write frontend code, turning scattered requirements into structured, purposeful screens that ship.
           </motion.p>
 
           <motion.div variants={fadeUp} style={{ display: "flex", gap: 14 }}>
@@ -905,6 +904,7 @@ function SkillsSection() {
         ref={ref}
         style={{ display: "flex", gap: 80, alignItems: "flex-start" }}
       >
+        {/* Left label */}
         <motion.div
           initial={{ opacity: 0, x: -24 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -919,212 +919,80 @@ function SkillsSection() {
             paddingTop: 12,
           }}
         >
-          Focus
+          Skills
         </motion.div>
+
+        {/* Right: skill categories */}
         <div style={{ flex: 1 }}>
-          {SKILLS.map((skill, i) => (
+          {SKILL_CATEGORIES.map((category, ci) => (
             <motion.div
-              key={skill}
+              key={category.label}
               initial={{ opacity: 0, x: 28 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.075, ease: easeOut }}
+              transition={{ duration: 0.6, delay: ci * 0.1, ease: easeOut }}
               style={{
                 borderTop: "1px solid rgba(0,0,0,0.07)",
-                padding: "16px 0",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
+                padding: "22px 0",
               }}
             >
-              <span
+              {/* Category label */}
+              <div
                 style={{
                   fontFamily: "Instrument Sans, sans-serif",
+                  fontSize: 11,
                   fontWeight: 700,
-                  fontSize: "clamp(36px, 5vw, 72px)",
-                  letterSpacing: "-0.04em",
-                  color: "#2E2C29",
-                  lineHeight: 1.05,
-                  transition: "color 0.2s",
-                  cursor: "default",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "#9FA0A3",
+                  marginBottom: 12,
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#C8B89A")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#2E2C29")}
               >
-                {skill}
-              </span>
-              <span style={{ fontSize: 20, color: "#9FA0A3" }}>↗</span>
+                {category.label}
+              </div>
+              {/* Skill pills */}
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                {category.items.map((skill, si) => (
+                  <motion.span
+                    key={skill}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={inView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{
+                      duration: 0.4,
+                      delay: ci * 0.1 + si * 0.04,
+                      ease: easeOut,
+                    }}
+                    style={{
+                      fontFamily: "Instrument Sans, sans-serif",
+                      fontWeight: 500,
+                      fontSize: 14,
+                      letterSpacing: "-0.01em",
+                      color: "#2E2C29",
+                      background: "#F5F4F0",
+                      border: "1px solid rgba(0,0,0,0.07)",
+                      borderRadius: 99,
+                      padding: "7px 16px",
+                      cursor: "default",
+                      transition: "background 0.2s, color 0.2s",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLSpanElement).style.background = "#2E2C29";
+                      (e.currentTarget as HTMLSpanElement).style.color = "#fff";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLSpanElement).style.background = "#F5F4F0";
+                      (e.currentTarget as HTMLSpanElement).style.color = "#2E2C29";
+                    }}
+                  >
+                    {skill}
+                  </motion.span>
+                ))}
+              </div>
             </motion.div>
           ))}
           <div style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }} />
         </div>
       </div>
     </section>
-  );
-}
-
-// ─── Footer ───────────────────────────────────────────────────────────────────
-function Footer() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  return (
-    <footer
-      id="hire-me"
-      ref={ref}
-      style={{
-        background: "#E7E7E3",
-        borderRadius: "56px 56px 0 0",
-        overflow: "hidden",
-        marginTop: 20,
-      }}
-    >
-      <div style={{ padding: "88px 80px 0" }}>
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          animate={inView ? "show" : "hidden"}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-start",
-              marginBottom: 72,
-            }}
-          >
-            <motion.div variants={fadeUp}>
-              <div
-                style={{
-                  fontFamily: "Instrument Sans, sans-serif",
-                  fontWeight: 700,
-                  fontSize: "clamp(22px, 3vw, 42px)",
-                  letterSpacing: "-0.04em",
-                  color: "#2E2C29",
-                  lineHeight: 1.1,
-                  marginBottom: 8,
-                }}
-              >
-                Located in Colombo, Sri Lanka
-              </div>
-              <div
-                style={{
-                  fontFamily: "Instrument Sans, sans-serif",
-                  fontWeight: 700,
-                  fontSize: "clamp(18px, 2.5vw, 36px)",
-                  letterSpacing: "-0.04em",
-                  color: "rgba(46,44,41,0.4)",
-                  lineHeight: 1.2,
-                  marginBottom: 4,
-                }}
-              >
-                kushani2000@gmail.com
-              </div>
-              <div
-                style={{
-                  fontFamily: "Instrument Sans, sans-serif",
-                  fontWeight: 700,
-                  fontSize: "clamp(16px, 2.2vw, 32px)",
-                  letterSpacing: "-0.04em",
-                  color: "rgba(46,44,41,0.4)",
-                  lineHeight: 1.2,
-                }}
-              >
-                (+94) 77 846 0592
-              </div>
-            </motion.div>
-            <motion.div
-              variants={fadeUp}
-              style={{ display: "flex", flexDirection: "column", gap: 6 }}
-            >
-              {["Linkedin", "Dribbble"].map((link) => {
-                const href =
-                  link === "Linkedin"
-                    ? "https://www.linkedin.com"
-                    : "https://dribbble.com";
-                return (
-                  <a
-                    key={link}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={link}
-                    data-cursor
-                    style={{
-                      fontFamily: "Instrument Sans, sans-serif",
-                      fontWeight: 700,
-                      fontSize: "clamp(22px, 3vw, 42px)",
-                      letterSpacing: "-0.04em",
-                      color: "#2E2C29",
-                      lineHeight: 1.1,
-                      textDecoration: "none",
-                      transition: "opacity 0.2s",
-                    }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.opacity = "0.45")
-                    }
-                    onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-                  >
-                    {link} ↗
-                  </a>
-                );
-              })}
-            </motion.div>
-          </div>
-          <motion.div
-            variants={
-              {
-                hidden: { opacity: 0, y: 40 },
-                show: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.8, ease: easeOut },
-                },
-              } as Variants
-            }
-            style={{
-              fontFamily: "Instrument Sans, sans-serif",
-              fontWeight: 700,
-              fontSize: "clamp(72px, 17vw, 260px)",
-              letterSpacing: "-0.06em",
-              color: "#2E2C29",
-              lineHeight: 0.88,
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-            }}
-          >
-            kushani ✦
-          </motion.div>
-        </motion.div>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "16px 80px 20px",
-          borderTop: "1px solid rgba(46,44,41,0.1)",
-          marginTop: 16,
-        }}
-      >
-        <span
-          style={{
-            fontFamily: "Instrument Sans, sans-serif",
-            fontSize: 13,
-            color: "#4A4A4A",
-          }}
-        >
-          2025 All Rights Reserved
-        </span>
-        <span
-          style={{
-            fontFamily: "Instrument Sans, sans-serif",
-            fontSize: 13,
-            color: "#4A4A4A",
-          }}
-        >
-          Design by Kushani Devendra.
-        </span>
-      </div>
-    </footer>
   );
 }
 

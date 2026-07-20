@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { ALL_PROJECTS, CATEGORIES, Project } from "./data";
 import { ProjectThumbnail } from "./ProjectThumbnail";
+import Footer from "./Footer";
 
 const easeOut = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -662,44 +663,8 @@ export default function WorkPage() {
         </AnimatePresence>
       </div>
 
-      {/* Footer strip */}
-      <div
-        style={{
-          background: "#F5F4F0",
-          padding: "32px 64px",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          borderTop: "1px solid rgba(0,0,0,0.07)",
-        }}
-      >
-        <span
-          style={{
-            fontFamily: "Instrument Sans, sans-serif",
-            fontSize: 13,
-            color: "#9FA0A3",
-          }}
-        >
-          Kushani Devendra · UI/UX Designer
-        </span>
-        <Link
-          to="/#hire-me"
-          style={{
-            fontFamily: "Instrument Sans, sans-serif",
-            fontWeight: 600,
-            fontSize: 14,
-            color: "#2E2C29",
-            textDecoration: "none",
-            display: "flex",
-            alignItems: "center",
-            gap: 6,
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.55")}
-          onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-        >
-          Get in touch ↗
-        </Link>
-      </div>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

@@ -61,8 +61,8 @@ export const ALL_PROJECTS: Project[] = [
     id: "kapuli-mobile-app",
     title: "Kapuli Mobile App",
     brief:
-      "A travel discovery experience for exploring Sri Lanka with a calm, local-first mobile experience.",
-    tags: ["Mobile App", "Design System"],
+      "An offline-first travel journaling app designed for guides and tour operators to document experiences and recognize wildlife.",
+    tags: ["Mobile App", "Design System", "Offline-First"],
     category: "Mobile App",
     bg: "#1D1B18",
     accent: "#C8B89A",
@@ -73,11 +73,11 @@ export const ALL_PROJECTS: Project[] = [
     duration: "5 months",
     role: "Requirement Analysis · Design System · Branding · Wireframing · Mobile Design · Prototyping",
     overview:
-      "Kapuli is a travel journalling app that brings recommendations, itinerary planning, and booking into one mobile-first experience.",
+      "Kapuli is a mobile app built for tour operators, guides, wildlife experiences, and outdoor journeys. It helps users capture travel experiences, create interactive journals, recognize wildlife, and document stories seamlessly—even in remote locations with limited connectivity. Designed with an offline-first experience, Kapuli combines storytelling, AI-powered recognition, and collaborative travel documentation into one connected platform.",
     challenge:
-      "Travel planning tends to be scattered across too many tools. The app needed to feel personal and local without becoming overwhelming.",
+      "Travel logging and reporting in remote areas with limited cellular connectivity are often disjointed. The interface needed to remain simple, intuitive, and fully functional offline, accommodating large image uploads and AI operations without causing friction.",
     solution:
-      "I structured the experience around discovery, planning, and booking flows with a flexible design system that could support both lightweight browsing and richer task flows.",
+      "I designed a streamlined journaling interface featuring offline state indicators, locally cached draft states, and a robust offline-first user journey. The design system features specialized components for AI wildlife scan workflows, interactive map pins, and collaborative journal sharing.",
     outcome:
       "The project was delivered as a polished Figma system with reusable components and a clear handoff path for product development.",
     tools: ["Figma"],
@@ -349,6 +349,106 @@ export const ALL_PROJECTS: Project[] = [
       },
     ],
   },
+  {
+    id: "treasury-forex-portal",
+    title: "Treasury Forex Trading Portal",
+    brief:
+      "An enterprise-grade trading interface with 200+ screens, a 20+ component design system, and WCAG 2.1 AA compliance.",
+    tags: ["Web App", "Enterprise UI", "React"],
+    category: "Web App",
+    bg: "#0C1A2E",
+    accent: "#22D3EE",
+    mockup: "desktop",
+    year: "2025",
+    featured: false,
+    client: "Commercial Bank of Ceylon PLC (via Orysys Ltd)",
+    duration: "9 months",
+    role: "UI/UX Design · Frontend Development · Design System · Accessibility",
+    overview:
+      "I designed and built a complex forex trading portal for treasury operations from end to end, creating trading interfaces, portfolio dashboards, and transaction workflows across 200+ screens.",
+    challenge:
+      "Translating high-complexity trading scenarios into usable, accessible interfaces while meeting WCAG 2.1 AA standards and supporting power-user keyboard workflows.",
+    solution:
+      "Built a comprehensive Figma design system with 20+ reusable components, then translated designs directly into production-ready React, TypeScript, and SCSS. Added custom data visualizations and live market data displays.",
+    outcome:
+      "Delivered a scalable, accessible trading portal with 200+ screens, full WCAG 2.1 AA compliance including ARIA labels and custom keyboard navigation for power users.",
+    tools: ["Figma", "React", "TypeScript", "SCSS"],
+  },
+  {
+    id: "oneapp-mobile-banking",
+    title: "OneApp Mobile Banking",
+    brief:
+      "A mobile banking super-app with 200+ screens streamlining 20+ core banking features into one intuitive experience.",
+    tags: ["Mobile App", "Banking UI", "React Native"],
+    category: "Mobile App",
+    bg: "#0F1F3D",
+    accent: "#4F8EF7",
+    mockup: "mobile",
+    year: "2024",
+    featured: false,
+    client: "Commercial Bank of Ceylon PLC (via Orysys Ltd)",
+    duration: "7 months",
+    role: "UI/UX Design · Frontend Development · User Research",
+    overview:
+      "OneApp is a mobile banking super-app that brings 20+ core banking features into one cohesive mobile interface. I designed the screens and helped build them using React Native.",
+    challenge:
+      "Designing 200+ screens for a wide range of banking features while maintaining a consistent, brand-aligned experience across complex task flows.",
+    solution:
+      "Conducted user research with the CTO and product owner, then designed the full experience in Figma before contributing to frontend development using React Native, TypeScript, Redux, and Axios.",
+    outcome:
+      "Delivered a polished, feature-rich mobile banking experience with high-fidelity prototypes that reduced design approval cycles and mentored a UI/UX intern through the process.",
+    tools: ["Figma", "React Native", "TypeScript", "Redux"],
+  },
+  {
+    id: "estatement-portal",
+    title: "E-Statement Portal",
+    brief:
+      "A complete UI overhaul replacing 100+ legacy vendor screens with a brand-aligned, accessible React component library.",
+    tags: ["Web App", "React", "Design System"],
+    category: "Web App",
+    bg: "#111827",
+    accent: "#34D399",
+    mockup: "desktop",
+    year: "2025",
+    featured: false,
+    client: "Commercial Bank of Ceylon PLC (via Orysys Ltd)",
+    duration: "4 months",
+    role: "UI/UX Design · Frontend Development · Mentoring",
+    overview:
+      "I led a full redesign of the bank's e-statement portal, replacing legacy vendor UI with custom, brand-aligned components and a maintainable React component library.",
+    challenge:
+      "100+ legacy screens required redesign and reimplementation with improved usability, while keeping the system extensible for future feature additions.",
+    solution:
+      "Redesigned all screens in Figma, then collaborated with the Tech Lead to build a React component library with TypeScript, Tailwind CSS, and Storybook. Applied responsive design across all breakpoints and wrote Jest unit tests.",
+    outcome:
+      "Delivered a fully responsive, component-driven portal with 100+ redesigned screens, full Storybook documentation, and a mentored junior engineer who contributed to the team.",
+    tools: ["Figma", "React", "TypeScript", "Tailwind CSS", "Storybook"],
+  },
+  {
+    id: "ivig-internal-portal",
+    title: "IVIG Internal Portal",
+    brief:
+      "A full-stack prototype for an internal banking portal, designed in Figma and built with Next.js, Shadcn, and Tailwind CSS.",
+    tags: ["Web App", "Next.js", "Prototyping"],
+    category: "Web App",
+    bg: "#1A1A2E",
+    accent: "#A78BFA",
+    mockup: "desktop",
+    year: "2026",
+    featured: false,
+    client: "Commercial Bank of Ceylon PLC (via Orysys Ltd)",
+    duration: "3 months",
+    role: "UI/UX Design · Frontend Prototyping · API Integration",
+    overview:
+      "I designed and prototyped an internal banking portal from scratch, translating complex business requirements into user journey diagrams, wireframes, and a working Next.js prototype.",
+    challenge:
+      "Complex business requirements needed to be mapped into clear journeys and then validated quickly with a working frontend prototype.",
+    solution:
+      "Translated requirements into Figma wireframes, then built the prototype using Next.js and TypeScript with Shadcn and Tailwind CSS. Implemented REST API integrations using the Fetch API for live data communication.",
+    outcome:
+      "Delivered a modern, accessible internal portal prototype with REST API integration, ready for stakeholder validation and handoff to the development team.",
+    tools: ["Figma", "Next.js", "TypeScript", "Shadcn", "Tailwind CSS"],
+  },
 ];
 
 export const FEATURED_PROJECTS = ALL_PROJECTS.filter(
@@ -365,8 +465,51 @@ export const SKILLS = [
   "Mobile Design",
   "Figma",
 ];
+
+export const SKILL_CATEGORIES = [
+  {
+    label: "Design",
+    items: [
+      "Design Systems",
+      "Product Design",
+      "User Journey Mapping",
+      "Wireframing",
+      "Prototyping",
+      "WCAG 2.1 Accessibility",
+      "Data Visualisation",
+      "Responsive Design",
+    ],
+  },
+  {
+    label: "Frontend",
+    items: [
+      "React",
+      "React Native",
+      "Next.js",
+      "TypeScript",
+      "Angular",
+      "SCSS",
+      "Tailwind CSS",
+      "Redux",
+    ],
+  },
+  {
+    label: "Tools",
+    items: [
+      "Figma",
+      "Storybook",
+      "Git",
+      "Material UI",
+      "Shadcn",
+      "Ant Design",
+    ],
+  },
+];
+
 export const CLIENTS = [
   "Commercial Bank of Ceylon PLC",
+  "Orysys Ltd",
+  "Virtusa (Pvt) Ltd",
   "NimiDev",
   "Neo Creative",
   "A Taste of Heaven",

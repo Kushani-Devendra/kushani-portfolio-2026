@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ALL_PROJECTS, Project, CaseSection } from "./data";
 import { PasswordGate, useAuth } from "./PasswordGate";
+import Footer from "./Footer";
 
 const easeOut = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -1200,38 +1201,8 @@ export default function ProjectPage() {
         </div>
       </div>
 
-      {/* Footer strip */}
-      <div
-        style={{
-          background: "#E7E7E3",
-          padding: "20px 72px",
-          display: "flex",
-          justifyContent: "space-between",
-          borderTop: "1px solid rgba(0,0,0,0.07)",
-        }}
-      >
-        <span
-          style={{
-            fontFamily: "Instrument Sans, sans-serif",
-            fontSize: 13,
-            color: "#9FA0A3",
-          }}
-        >
-          Kushani Devendra · UI/UX Designer
-        </span>
-        <Link
-          to="/#hire-me"
-          style={{
-            fontFamily: "Instrument Sans, sans-serif",
-            fontWeight: 600,
-            fontSize: 14,
-            color: "#2E2C29",
-            textDecoration: "none",
-          }}
-        >
-          Get in touch ↗
-        </Link>
-      </div>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
