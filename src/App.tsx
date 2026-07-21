@@ -262,7 +262,9 @@ function Hero() {
               maxWidth: 620,
             }}
           >
-            I design systems, build SaaS products, and write frontend code, turning scattered requirements into structured, purposeful screens that ship.
+            I design systems, build SaaS products, and write frontend code,
+            turning scattered requirements into structured, purposeful screens
+            that ship.
           </motion.p>
 
           <motion.div variants={fadeUp} style={{ display: "flex", gap: 14 }}>
@@ -552,7 +554,7 @@ function ThumbCard({
         </motion.div>
 
         {/* Category pill — bottom left */}
-        <div
+        {/* <div
           style={{
             position: "absolute",
             bottom: 14,
@@ -580,7 +582,7 @@ function ThumbCard({
               {tag}
             </span>
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* ── Info below ── */}
@@ -656,7 +658,7 @@ function ThumbCard({
       </div>
 
       {/* Bottom border line — animates on hover */}
-      <motion.div
+      {/* <motion.div
         animate={{ scaleX: hovered ? 1 : 0 }}
         initial={{ scaleX: 0 }}
         transition={{ duration: 0.4, ease: easeOut }}
@@ -667,7 +669,7 @@ function ThumbCard({
           borderRadius: 99,
           marginTop: 4,
         }}
-      />
+      /> */}
     </motion.div>
   );
 }
@@ -725,49 +727,6 @@ function WorkSection() {
             Things I've designed.
           </h2>
         </div>
-
-        <a
-          href="/work"
-          data-cursor
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 8,
-            fontFamily: "Instrument Sans, sans-serif",
-            fontSize: 14,
-            fontWeight: 500,
-            color: "#2E2C29",
-            textDecoration: "none",
-            padding: "11px 22px",
-            borderRadius: 99,
-            border: "1.5px solid rgba(0,0,0,0.11)",
-            transition: "all 0.22s",
-            letterSpacing: "-0.01em",
-          }}
-          onMouseEnter={(e) => {
-            const el = e.currentTarget;
-            el.style.background = "#2E2C29";
-            el.style.color = "#fff";
-            el.style.borderColor = "#2E2C29";
-          }}
-          onMouseLeave={(e) => {
-            const el = e.currentTarget;
-            el.style.background = "";
-            el.style.color = "#2E2C29";
-            el.style.borderColor = "rgba(0,0,0,0.11)";
-          }}
-        >
-          All work
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path
-              d="M2 10L10 2M10 2H3M10 2v7"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </a>
       </motion.div>
 
       {/* ── 2-column grid ── */}
@@ -906,7 +865,12 @@ function SkillsSection() {
                 >
                   {skill}
                 </span>
-                <span style={{ fontSize: 20, color: isHovered ? "#C8B89A" : "#9FA0A3" }}>
+                <span
+                  style={{
+                    fontSize: 20,
+                    color: isHovered ? "#C8B89A" : "#9FA0A3",
+                  }}
+                >
                   ↗
                 </span>
               </motion.div>

@@ -69,7 +69,7 @@ export const ALL_PROJECTS: Project[] = [
     mockup: "mobile",
     year: "2026",
     featured: true,
-    client: "NimiDev",
+    client: "Kapuli",
     duration: "5 months",
     role: "Branding · Design System · Wireframing · Mobile Design · Prototyping",
     overview:
@@ -470,21 +470,20 @@ export const CATEGORIES = [
 ];
 export const SKILLS = [
   "Design Systems",
-  "Product Design",
   "Web Design",
-  "Frontend Development",
   "Mobile Design",
-  "Figma",
+  "Protyping",
+  "Frontend Development",
 ];
 
 export const SKILL_CATEGORIES = [
   {
     label: "Design",
     items: [
-      "Design Systems",
-      "Product Design",
       "User Journey Mapping",
       "Wireframing",
+      "Design Systems",
+      "Product Design",
       "Prototyping",
       "WCAG 2.1 Accessibility",
       "Data Visualisation",
@@ -494,18 +493,29 @@ export const SKILL_CATEGORIES = [
   {
     label: "Frontend",
     items: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Angular",
+      "HTML",
+      "CSS",
       "SCSS",
       "Tailwind CSS",
+      "React",
+      "JavaScript (ES6)",
+      "TypeScript",
+      "Angular",
       "Redux",
     ],
   },
   {
-    label: "Tools",
-    items: ["Figma", "Storybook", "Git", "Material UI", "Shadcn", "Ant Design"],
+    label: "Libraries & Tools",
+    items: [
+      "Figma",
+      "Storybook",
+      "Git",
+      "Material UI",
+      "Shadcn",
+      "Ant Design",
+      "Bootstrap",
+      "Radzen",
+    ],
   },
 ];
 
@@ -513,9 +523,13 @@ export const CLIENTS = [
   "Commercial Bank of Ceylon PLC",
   "Orysys Ltd",
   "Virtusa (Pvt) Ltd",
-  "NimiDev",
+  "Kapuli",
+  "Detours Travel",
   "Neo Creative",
   "A Taste of Heaven",
   "Subee Clothing",
   "Salon Zero",
+  "Aussie Life Education",
+  "VIP Travels",
+  "ESP Academy",
 ];

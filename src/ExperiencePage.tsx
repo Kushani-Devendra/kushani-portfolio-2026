@@ -5,12 +5,29 @@ import Footer from "./Footer";
 const easeOut = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 // ─── Data ──────────────────────────────────────────────────────────────────────
+
+const CLIENTS = [
+  "Commercial Bank of Ceylon PLC",
+  "Orysys Ltd",
+  "Virtusa (Pvt) Ltd",
+  "Kapuli",
+  "Detours Travel",
+  "Neo Creative",
+  "A Taste of Heaven",
+  "Subee Clothing",
+  "Salon Zero",
+  "Aussie Life Education",
+  "VIP Travels",
+  "ESP Academy",
+];
+
 const experienceEntries = [
   {
     title: "UI/UX Engineer",
     period: "Dec 2023 – Present",
     company: "Orysys Ltd",
-    subtitle: "Subsidiary of Commercial Bank of Ceylon PLC · Colombo, Sri Lanka",
+    subtitle:
+      "Subsidiary of Commercial Bank of Ceylon PLC · Colombo, Sri Lanka",
     summary:
       "I lead interface design and frontend development for enterprise banking products, focusing on everything from Figma design systems and WCAG-compliant UI to production-ready React components across trading platforms, mobile banking, and internal portals.",
     projects: [
@@ -48,7 +65,8 @@ const experienceEntries = [
         name: "ComBank RemitPlus — Revamp",
         period: "Dec 2023 – Feb 2024",
         desc: "Redesigned the remittance service UI serving 30,000+ users. Developed with Angular 16, TypeScript, SCSS, Material UI, and Bootstrap. Product documentation contributed to winning the Payments Solution Award at the Asian Banking & Finance Awards 2024.",
-        award: "🏆 Payments Solution Award · Asian Banking & Finance Awards 2024",
+        award:
+          "🏆 Payments Solution Award · Asian Banking & Finance Awards 2024",
       },
     ],
   },
@@ -78,10 +96,10 @@ const skillCategories = [
   {
     label: "Design",
     items: [
-      "Design Systems",
       "User Journey Mapping",
       "Wireframing",
-      "High-Fidelity Design",
+      "Design Systems",
+      "Product Design",
       "Prototyping",
       "WCAG 2.1 Accessibility",
       "Data Visualisation",
@@ -91,12 +109,14 @@ const skillCategories = [
   {
     label: "Frontend",
     items: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Angular",
+      "HTML",
+      "CSS",
       "SCSS",
       "Tailwind CSS",
+      "React",
+      "JavaScript (ES6)",
+      "TypeScript",
+      "Angular",
       "Redux",
     ],
   },
@@ -109,6 +129,8 @@ const skillCategories = [
       "Material UI",
       "Shadcn",
       "Ant Design",
+      "Bootstrap",
+      "Radzen",
     ],
   },
 ];
@@ -387,7 +409,9 @@ function ExperienceCard({
 // ─── Main ──────────────────────────────────────────────────────────────────────
 export default function ExperiencePage() {
   return (
-    <div style={{ minHeight: "100vh", background: "#FAF9F6", color: "#2E2C29" }}>
+    <div
+      style={{ minHeight: "100vh", background: "#FAF9F6", color: "#2E2C29" }}
+    >
       <div
         style={{ maxWidth: 1100, margin: "0 auto", padding: "120px 32px 80px" }}
       >
@@ -499,8 +523,8 @@ export default function ExperiencePage() {
             >
               {[
                 { value: "4+", label: "Years experience" },
-                { value: "400+", label: "Screens designed" },
-                { value: "2", label: "Companies" },
+                { value: "15+", label: "Products designed" },
+                { value: "10+", label: "Clients" },
               ].map((stat) => (
                 <div key={stat.label}>
                   <div
@@ -526,6 +550,46 @@ export default function ExperiencePage() {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Clients */}
+            <div
+              style={{
+                marginTop: 32,
+                paddingTop: 24,
+                borderTop: "1px solid rgba(0,0,0,0.06)",
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "Instrument Sans, sans-serif",
+                  fontSize: 11,
+                  fontWeight: 700,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  color: "#9FA0A3",
+                  marginBottom: 16,
+                }}
+              >
+                Selected Companies & Clients
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                {CLIENTS.map((client) => (
+                  <span
+                    key={client}
+                    style={{
+                      fontFamily: "Instrument Sans, sans-serif",
+                      fontSize: 13,
+                      color: "#5C5A56",
+                      background: "#F5F4F0",
+                      padding: "6px 14px",
+                      borderRadius: 99,
+                    }}
+                  >
+                    {client}
+                  </span>
+                ))}
+              </div>
             </div>
           </motion.section>
 
@@ -602,7 +666,9 @@ export default function ExperiencePage() {
         </section>
 
         {/* ── Education + Awards row ── */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+        <div
+          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}
+        >
           {/* Education */}
           <motion.section
             initial={{ opacity: 0, y: 20 }}
@@ -729,8 +795,7 @@ export default function ExperiencePage() {
                     alignItems: "flex-start",
                     gap: 14,
                     padding: "14px 0",
-                    borderTop:
-                      i === 0 ? "none" : "1px solid rgba(0,0,0,0.06)",
+                    borderTop: i === 0 ? "none" : "1px solid rgba(0,0,0,0.06)",
                   }}
                 >
                   <span style={{ fontSize: 16, flexShrink: 0, marginTop: 1 }}>

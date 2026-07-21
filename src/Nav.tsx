@@ -71,10 +71,7 @@ export function PageNav() {
             </Link>
           );
         })}
-        <Link
-          to={isHomeRoute ? "#hire-me" : "/#hire-me"}
-          className="nav-cta"
-        >
+        <Link to={isHomeRoute ? "#hire-me" : "/#hire-me"} className="nav-cta">
           Hire me
         </Link>
       </div>

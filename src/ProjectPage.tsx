@@ -112,12 +112,8 @@ function SectionBlock({
         <div className="project-page-subsection">
           {section.subsections.map((sub, i) => (
             <div key={i}>
-              <h3 className="project-page-subsection-title">
-                {sub.heading}
-              </h3>
-              <p className="project-page-subsection-body">
-                {sub.body}
-              </p>
+              <h3 className="project-page-subsection-title">{sub.heading}</h3>
+              <p className="project-page-subsection-body">{sub.body}</p>
             </div>
           ))}
         </div>
@@ -175,9 +171,7 @@ function RelatedCard({ project }: { project: Project }) {
           </div>
         )}
       </div>
-      <div className="project-page-related-tag">
-        {project.tags[0]}
-      </div>
+      <div className="project-page-related-tag">{project.tags[0]}</div>
       <div className={`project-page-related-title ${hovered ? "hovered" : ""}`}>
         {project.title}
       </div>
@@ -417,11 +411,13 @@ export default function ProjectPage() {
               .filter((m) => m.value)
               .map(({ label, value }) => (
                 <div key={label}>
-                  <div className="project-page-meta-label">
-                    {label}
-                  </div>
+                  <div className="project-page-meta-label">{label}</div>
                   <div
-                    className={label === "Role" ? "project-page-role-value" : "project-page-meta-value"}
+                    className={
+                      label === "Role"
+                        ? "project-page-role-value"
+                        : "project-page-meta-value"
+                    }
                   >
                     {label === "Role" ? formatRoleValue(value) : value}
                   </div>
@@ -430,9 +426,7 @@ export default function ProjectPage() {
 
             {project.tools && (
               <div>
-                <div className="project-page-meta-label">
-                  Tools
-                </div>
+                <div className="project-page-meta-label">Tools</div>
                 <div className="project-page-meta-value">
                   {project.tools.join(" · ")}
                 </div>
@@ -454,7 +448,10 @@ export default function ProjectPage() {
                   }}
                   data-cursor
                   className="project-page-live-button"
-                  style={{ background: project.accent, border: `1.5px solid ${project.accent}` }}
+                  style={{
+                    background: project.accent,
+                    border: `1.5px solid ${project.accent}`,
+                  }}
                 >
                   View live ↗
                 </button>
@@ -466,7 +463,9 @@ export default function ProjectPage() {
 
       {/* ── Main content: TOC + body ── */}
       <div className="project-page-body">
-        <div className={`project-page-body-grid ${hasSections ? "has-sections" : ""}`}>
+        <div
+          className={`project-page-body-grid ${hasSections ? "has-sections" : ""}`}
+        >
           {/* Sidebar TOC */}
           {hasSections && (
             <div style={{ paddingTop: 80 }}>

@@ -131,7 +131,6 @@ function WorkCard({ project, index }: { project: Project; index: number }) {
             pointerEvents: "none",
           }}
         />
-
       </div>
 
       <div
