@@ -22,6 +22,7 @@ import {
   Project,
 } from "./data";
 import "./index.css";
+import "./styles/navigation.css";
 
 const easeOut = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -265,30 +266,7 @@ function Hero() {
           </motion.p>
 
           <motion.div variants={fadeUp} style={{ display: "flex", gap: 14 }}>
-            <a
-              href="#hire-me"
-              data-cursor
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                padding: "14px 32px",
-                borderRadius: 99,
-                background: "#2E2C29",
-                color: "#fff",
-                fontFamily: "Instrument Sans, sans-serif",
-                fontWeight: 500,
-                fontSize: 15,
-                textDecoration: "none",
-                transition: "background 0.25s",
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.background = "#4A4845")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.background = "#2E2C29")
-              }
-            >
+            <a href="#hire-me" data-cursor className="hero-cta-primary">
               Hire me
               <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
                 <path
@@ -300,34 +278,7 @@ function Hero() {
                 />
               </svg>
             </a>
-            <a
-              href="/work"
-              data-cursor
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                padding: "14px 32px",
-                borderRadius: 99,
-                border: "1.5px solid rgba(0,0,0,0.18)",
-                color: "#2E2C29",
-                fontFamily: "Instrument Sans, sans-serif",
-                fontWeight: 500,
-                fontSize: 15,
-                textDecoration: "none",
-                transition: "all 0.25s",
-                background: "rgba(255,255,255,0.4)",
-                backdropFilter: "blur(8px)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "#2E2C29";
-                e.currentTarget.style.color = "#fff";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.4)";
-                e.currentTarget.style.color = "#2E2C29";
-              }}
-            >
+            <a href="/work" data-cursor className="hero-cta-secondary">
               View all work
             </a>
           </motion.div>
@@ -895,6 +846,8 @@ function WorkSection() {
 function SkillsSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+
   return (
     <section
       id="experience"
@@ -921,39 +874,44 @@ function SkillsSection() {
           Focus
         </motion.div>
         <div style={{ flex: 1 }}>
-          {SKILLS.map((skill, i) => (
-            <motion.div
-              key={skill}
-              initial={{ opacity: 0, x: 28 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: i * 0.075, ease: easeOut }}
-              style={{
-                borderTop: "1px solid rgba(0,0,0,0.07)",
-                padding: "16px 0",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <span
+          {SKILLS.map((skill, i) => {
+            const isHovered = hoveredSkill === skill;
+            return (
+              <motion.div
+                key={skill}
+                initial={{ opacity: 0, x: 28 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.6, delay: i * 0.075, ease: easeOut }}
+                onMouseEnter={() => setHoveredSkill(skill)}
+                onMouseLeave={() => setHoveredSkill(null)}
                 style={{
-                  fontFamily: "Instrument Sans, sans-serif",
-                  fontWeight: 700,
-                  fontSize: "clamp(36px, 5vw, 72px)",
-                  letterSpacing: "-0.04em",
-                  color: "#2E2C29",
-                  lineHeight: 1.05,
-                  transition: "color 0.2s",
+                  borderTop: "1px solid rgba(0,0,0,0.07)",
+                  padding: "16px 0",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
                   cursor: "default",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#C8B89A")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#2E2C29")}
               >
-                {skill}
-              </span>
-              <span style={{ fontSize: 20, color: "#9FA0A3" }}>↗</span>
-            </motion.div>
-          ))}
+                <span
+                  style={{
+                    fontFamily: "Instrument Sans, sans-serif",
+                    fontWeight: 700,
+                    fontSize: "clamp(36px, 5vw, 72px)",
+                    letterSpacing: "-0.04em",
+                    color: isHovered ? "#C8B89A" : "#2E2C29",
+                    lineHeight: 1.05,
+                    transition: "color 0.2s",
+                  }}
+                >
+                  {skill}
+                </span>
+                <span style={{ fontSize: 20, color: isHovered ? "#C8B89A" : "#9FA0A3" }}>
+                  ↗
+                </span>
+              </motion.div>
+            );
+          })}
           <div style={{ borderTop: "1px solid rgba(0,0,0,0.07)" }} />
         </div>
       </div>

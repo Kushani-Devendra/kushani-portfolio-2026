@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ALL_PROJECTS, Project, CaseSection } from "./data";
 import { PasswordGate, useAuth } from "./PasswordGate";
 import Footer from "./Footer";
+import "./styles/project-page.css";
 
 const easeOut = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -18,20 +19,8 @@ function TableOfContents({
   accent: string;
 }) {
   return (
-    <nav style={{ position: "sticky", top: 100, paddingTop: 4 }}>
-      <div
-        style={{
-          fontFamily: "Instrument Sans, sans-serif",
-          fontSize: 10,
-          fontWeight: 700,
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
-          color: "#C4C5C7",
-          marginBottom: 16,
-        }}
-      >
-        Contents
-      </div>
+    <nav className="project-page-toc">
+      <div className="project-page-toc-title">Contents</div>
       <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
         {sections.map((s) => {
           const active = activeId === s.id;
@@ -45,28 +34,8 @@ function TableOfContents({
                   .getElementById(s.id)
                   ?.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              style={{
-                fontFamily: "Instrument Sans, sans-serif",
-                fontSize: 13,
-                fontWeight: active ? 600 : 400,
-                color: active ? "#2E2C29" : "#9FA0A3",
-                textDecoration: "none",
-                padding: "6px 0 6px 14px",
-                borderLeft: `2px solid ${active ? accent : "transparent"}`,
-                transition: "all 0.2s",
-                letterSpacing: "-0.01em",
-                display: "block",
-              }}
-              onMouseEnter={(e) => {
-                if (!active)
-                  (e.currentTarget as HTMLAnchorElement).style.color =
-                    "#2E2C29";
-              }}
-              onMouseLeave={(e) => {
-                if (!active)
-                  (e.currentTarget as HTMLAnchorElement).style.color =
-                    "#9FA0A3";
-              }}
+              className={`project-page-toc-link ${active ? "active" : ""}`}
+              style={{ borderLeftColor: active ? accent : "transparent" }}
             >
               {s.label}
             </a>
@@ -81,47 +50,11 @@ function TableOfContents({
 function FigmaEmbed({ url, title }: { url: string; title: string }) {
   const [loaded, setLoaded] = useState(false);
   return (
-    <div
-      style={{
-        borderRadius: 16,
-        overflow: "hidden",
-        border: "1px solid rgba(0,0,0,0.08)",
-        background: "#F5F4F0",
-        position: "relative",
-      }}
-    >
+    <div className="project-page-embed-shell">
       {!loaded && (
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            gap: 12,
-          }}
-        >
-          <div
-            style={{
-              width: 36,
-              height: 36,
-              border: "2px solid rgba(0,0,0,0.1)",
-              borderTopColor: "#2E2C29",
-              borderRadius: "50%",
-              animation: "spin 0.8s linear infinite",
-            }}
-          />
-          <span
-            style={{
-              fontFamily: "Instrument Sans, sans-serif",
-              fontSize: 13,
-              color: "#9FA0A3",
-            }}
-          >
-            Loading Figma…
-          </span>
-          <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+        <div className="project-page-embed-loading">
+          <div className="project-page-spinner" />
+          <span className="project-page-loading-text">Loading Figma…</span>
         </div>
       )}
       <iframe
@@ -129,14 +62,8 @@ function FigmaEmbed({ url, title }: { url: string; title: string }) {
         title={`${title} — Figma`}
         allowFullScreen
         onLoad={() => setLoaded(true)}
-        style={{
-          width: "100%",
-          height: 600,
-          border: "none",
-          display: "block",
-          opacity: loaded ? 1 : 0,
-          transition: "opacity 0.4s",
-        }}
+        className="project-page-embed-frame"
+        style={{ opacity: loaded ? 1 : 0, transition: "opacity 0.4s" }}
       />
     </div>
   );
@@ -153,40 +80,19 @@ function SectionBlock({
   const ref = useRef<HTMLDivElement>(null);
 
   return (
-    <div
-      id={section.id}
-      ref={ref}
-      style={{
-        paddingTop: 80,
-        scrollMarginTop: 100,
-      }}
-    >
+    <div id={section.id} ref={ref} className="project-page-section-block">
       {/* Section label */}
       <div
-        style={{
-          fontFamily: "Instrument Sans, sans-serif",
-          fontSize: 11,
-          fontWeight: 700,
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
-          color: accentColor,
-          marginBottom: 12,
-        }}
+        className="project-page-section-label"
+        style={{ color: accentColor }}
       >
         {section.label}
       </div>
 
       {/* Section heading */}
       <h2
-        style={{
-          fontFamily: "Instrument Serif, serif",
-          fontWeight: 400,
-          fontSize: "clamp(26px, 3vw, 38px)",
-          letterSpacing: "-0.03em",
-          color: "#2E2C29",
-          lineHeight: 1.15,
-          marginBottom: section.body ? 24 : 0,
-        }}
+        className="project-page-section-heading"
+        style={{ marginBottom: section.body ? 24 : 0 }}
       >
         {section.heading}
       </h2>
@@ -194,16 +100,8 @@ function SectionBlock({
       {/* Body */}
       {section.body && (
         <p
-          style={{
-            fontFamily: "Instrument Sans, sans-serif",
-            fontWeight: 300,
-            fontSize: 17,
-            lineHeight: 1.8,
-            color: "#4A4845",
-            letterSpacing: "-0.01em",
-            maxWidth: 680,
-            marginBottom: section.subsections ? 40 : 0,
-          }}
+          className="project-page-section-body"
+          style={{ marginBottom: section.subsections ? 40 : 0 }}
         >
           {section.body}
         </p>
@@ -211,32 +109,13 @@ function SectionBlock({
 
       {/* Subsections */}
       {section.subsections && section.subsections.length > 0 && (
-        <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+        <div className="project-page-subsection">
           {section.subsections.map((sub, i) => (
             <div key={i}>
-              <h3
-                style={{
-                  fontFamily: "Instrument Sans, sans-serif",
-                  fontWeight: 600,
-                  fontSize: 15,
-                  letterSpacing: "-0.02em",
-                  color: "#2E2C29",
-                  marginBottom: 10,
-                }}
-              >
+              <h3 className="project-page-subsection-title">
                 {sub.heading}
               </h3>
-              <p
-                style={{
-                  fontFamily: "Instrument Sans, sans-serif",
-                  fontWeight: 300,
-                  fontSize: 16,
-                  lineHeight: 1.75,
-                  color: "#5C5A57",
-                  letterSpacing: "-0.01em",
-                  maxWidth: 640,
-                }}
-              >
+              <p className="project-page-subsection-body">
                 {sub.body}
               </p>
             </div>
@@ -262,20 +141,11 @@ function RelatedCard({ project }: { project: Project }) {
         window.scrollTo(0, 0);
       }}
       data-cursor
-      style={{ cursor: "pointer", flex: 1, minWidth: 0 }}
+      className="project-page-related-card"
     >
       <div
-        style={{
-          borderRadius: 16,
-          overflow: "hidden",
-          height: 220,
-          background: project.bg,
-          marginBottom: 16,
-          boxShadow: hovered
-            ? "0 16px 40px rgba(0,0,0,0.16)"
-            : "0 2px 12px rgba(0,0,0,0.08)",
-          transition: "box-shadow 0.3s ease",
-        }}
+        className={`project-page-related-thumb ${hovered ? "hovered" : ""}`}
+        style={{ background: project.bg }}
       >
         {hasCover ? (
           <motion.img
@@ -283,13 +153,7 @@ function RelatedCard({ project }: { project: Project }) {
             alt={project.title}
             animate={{ scale: hovered ? 1.04 : 1 }}
             transition={{ duration: 0.5, ease: easeOut }}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "top",
-              display: "block",
-            }}
+            className="project-page-related-thumb-image"
           />
         ) : (
           <div
@@ -311,32 +175,10 @@ function RelatedCard({ project }: { project: Project }) {
           </div>
         )}
       </div>
-      <div
-        style={{
-          fontFamily: "Instrument Sans, sans-serif",
-          fontSize: 11,
-          fontWeight: 600,
-          letterSpacing: "0.07em",
-          textTransform: "uppercase",
-          color: "#9FA0A3",
-          marginBottom: 6,
-        }}
-      >
+      <div className="project-page-related-tag">
         {project.tags[0]}
       </div>
-      <div
-        style={{
-          fontFamily: "Instrument Serif, serif",
-          fontSize: 20,
-          letterSpacing: "-0.03em",
-          color: "#2E2C29",
-          lineHeight: 1.2,
-          textDecoration: hovered ? "underline" : "none",
-          textDecorationColor: "rgba(0,0,0,0.2)",
-          textUnderlineOffset: 3,
-          transition: "text-decoration 0.2s",
-        }}
-      >
+      <div className={`project-page-related-title ${hovered ? "hovered" : ""}`}>
         {project.title}
       </div>
     </div>
@@ -407,10 +249,10 @@ export default function ProjectPage() {
   const handleUnlock = () => {
     unlock();
     setGateOpen(false);
-    if (project.liveUrl && project.liveUrl !== "#") {
-      window.open(project.liveUrl, "_blank", "noopener,noreferrer");
-    }
   };
+
+  const formatRoleValue = (value?: string) =>
+    value ? value.replace(/\./g, " . ") : "";
 
   const related = ALL_PROJECTS.filter((p) => p.id !== project.id).slice(0, 3);
   const currentIndex = ALL_PROJECTS.findIndex((p) => p.id === id);
@@ -435,7 +277,7 @@ export default function ProjectPage() {
         : [];
 
   return (
-    <div style={{ minHeight: "100vh", background: "#fff" }}>
+    <div className="project-page-shell">
       {/* Password gate modal */}
       <AnimatePresence>
         {gateOpen && !authed && (
@@ -506,90 +348,32 @@ export default function ProjectPage() {
       </AnimatePresence>
 
       {/* ── Hero ── */}
-      <div
-        style={{
-          background: "#FAFAF8",
-          borderBottom: "1px solid rgba(0,0,0,0.07)",
-          paddingTop: 96,
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1100,
-            margin: "0 auto",
-            padding: "60px 72px 56px",
-          }}
-        >
+      <div className="project-page-hero">
+        <div className="project-page-container">
           {/* Breadcrumb */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 8,
-              marginBottom: 36,
-            }}
-          >
-            <Link
-              to="/"
-              style={{
-                fontFamily: "Instrument Sans, sans-serif",
-                fontSize: 13,
-                color: "#C4C5C7",
-                textDecoration: "none",
-              }}
-            >
+          <div className="project-page-breadcrumb">
+            <Link to="/" className="project-page-breadcrumb-link">
               Home
             </Link>
-            <span style={{ color: "#E0E0E0", fontSize: 13 }}>/</span>
-            <Link
-              to="/work"
-              style={{
-                fontFamily: "Instrument Sans, sans-serif",
-                fontSize: 13,
-                color: "#C4C5C7",
-                textDecoration: "none",
-              }}
-            >
+            <span className="project-page-breadcrumb-separator">/</span>
+            <Link to="/work" className="project-page-breadcrumb-link">
               Work
             </Link>
-            <span style={{ color: "#E0E0E0", fontSize: 13 }}>/</span>
-            <span
-              style={{
-                fontFamily: "Instrument Sans, sans-serif",
-                fontSize: 13,
-                color: "#9FA0A3",
-              }}
-            >
+            <span className="project-page-breadcrumb-separator">/</span>
+            <span className="project-page-breadcrumb-current">
               {project.title}
             </span>
           </div>
 
           {/* Category */}
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 7,
-              marginBottom: 20,
-            }}
-          >
+          <div className="project-page-category">
             <div
-              style={{
-                width: 6,
-                height: 6,
-                borderRadius: "50%",
-                background: project.accent,
-              }}
+              className="project-page-category-dot"
+              style={{ background: project.accent }}
             />
             <span
-              style={{
-                fontFamily: "Instrument Sans, sans-serif",
-                fontSize: 12,
-                fontWeight: 600,
-                letterSpacing: "0.09em",
-                textTransform: "uppercase",
-                color: project.accent,
-              }}
+              className="project-page-category-label"
+              style={{ color: project.accent }}
             >
               {project.category}
             </span>
@@ -600,16 +384,7 @@ export default function ProjectPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: easeOut }}
-            style={{
-              fontFamily: "Instrument Serif, serif",
-              fontWeight: 400,
-              fontSize: "clamp(40px, 5.5vw, 68px)",
-              letterSpacing: "-0.03em",
-              color: "#2E2C29",
-              lineHeight: 1.05,
-              marginBottom: 28,
-              maxWidth: 780,
-            }}
+            className="project-page-title"
           >
             {project.title}
           </motion.h1>
@@ -620,16 +395,7 @@ export default function ProjectPage() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: easeOut }}
-              style={{
-                fontFamily: "Instrument Sans, sans-serif",
-                fontWeight: 300,
-                fontSize: 18,
-                lineHeight: 1.7,
-                color: "#6B6A67",
-                letterSpacing: "-0.01em",
-                maxWidth: 640,
-                marginBottom: 40,
-              }}
+              className="project-page-overview"
             >
               {project.overview}
             </motion.p>
@@ -640,13 +406,7 @@ export default function ProjectPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "16px 48px",
-              paddingTop: 28,
-              borderTop: "1px solid rgba(0,0,0,0.08)",
-            }}
+            className="project-page-meta"
           >
             {[
               { label: "Client", value: project.client },
@@ -657,57 +417,23 @@ export default function ProjectPage() {
               .filter((m) => m.value)
               .map(({ label, value }) => (
                 <div key={label}>
-                  <div
-                    style={{
-                      fontFamily: "Instrument Sans, sans-serif",
-                      fontSize: 10,
-                      fontWeight: 700,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "#C4C5C7",
-                      marginBottom: 5,
-                    }}
-                  >
+                  <div className="project-page-meta-label">
                     {label}
                   </div>
                   <div
-                    style={{
-                      fontFamily: "Instrument Sans, sans-serif",
-                      fontSize: 14,
-                      fontWeight: 500,
-                      color: "#2E2C29",
-                      letterSpacing: "-0.01em",
-                    }}
+                    className={label === "Role" ? "project-page-role-value" : "project-page-meta-value"}
                   >
-                    {value}
+                    {label === "Role" ? formatRoleValue(value) : value}
                   </div>
                 </div>
               ))}
 
             {project.tools && (
               <div>
-                <div
-                  style={{
-                    fontFamily: "Instrument Sans, sans-serif",
-                    fontSize: 10,
-                    fontWeight: 700,
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
-                    color: "#C4C5C7",
-                    marginBottom: 5,
-                  }}
-                >
+                <div className="project-page-meta-label">
                   Tools
                 </div>
-                <div
-                  style={{
-                    fontFamily: "Instrument Sans, sans-serif",
-                    fontSize: 14,
-                    fontWeight: 400,
-                    color: "#2E2C29",
-                    letterSpacing: "-0.01em",
-                  }}
-                >
+                <div className="project-page-meta-value">
                   {project.tools.join(" · ")}
                 </div>
               </div>
@@ -718,41 +444,17 @@ export default function ProjectPage() {
               <div style={{ display: "flex", alignItems: "flex-end" }}>
                 <button
                   onClick={() => {
-                    if (authed) {
-                      if (project.liveUrl && project.liveUrl !== "#") {
-                        window.open(
-                          project.liveUrl,
-                          "_blank",
-                          "noopener,noreferrer",
-                        );
-                      }
-                    } else {
-                      setGateOpen(true);
+                    if (project.liveUrl && project.liveUrl !== "#") {
+                      window.open(
+                        project.liveUrl,
+                        "_blank",
+                        "noopener,noreferrer",
+                      );
                     }
                   }}
                   data-cursor
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 6,
-                    fontFamily: "Instrument Sans, sans-serif",
-                    fontSize: 13,
-                    fontWeight: 500,
-                    color: project.accent,
-                    background: "transparent",
-                    border: `1px solid ${project.accent}50`,
-                    borderRadius: 99,
-                    padding: "7px 16px",
-                    cursor: "pointer",
-                    transition: "all 0.2s",
-                    letterSpacing: "-0.01em",
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.background = project.accent + "15")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.background = "transparent")
-                  }
+                  className="project-page-live-button"
+                  style={{ background: project.accent, border: `1.5px solid ${project.accent}` }}
                 >
                   View live ↗
                 </button>
@@ -763,14 +465,8 @@ export default function ProjectPage() {
       </div>
 
       {/* ── Main content: TOC + body ── */}
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 72px 80px" }}>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: hasSections ? "180px 1fr" : "1fr",
-            gap: hasSections ? 64 : 0,
-          }}
-        >
+      <div className="project-page-body">
+        <div className={`project-page-body-grid ${hasSections ? "has-sections" : ""}`}>
           {/* Sidebar TOC */}
           {hasSections && (
             <div style={{ paddingTop: 80 }}>
@@ -805,40 +501,21 @@ export default function ProjectPage() {
                 >
                   {figmaPreviewLinks.map((preview, index) => (
                     <div key={`${preview.label}-${index}`}>
-                      <div
-                        style={{
-                          fontFamily: "Instrument Sans, sans-serif",
-                          fontSize: 12,
-                          fontWeight: 600,
-                          color: "#2E2C29",
-                          marginBottom: 10,
-                        }}
-                      >
+                      <div className="project-page-preview-label">
                         {preview.label}
                       </div>
                       <FigmaEmbed
                         url={preview.url}
                         title={`${project.title} — ${preview.label}`}
                       />
-                      <p
-                        style={{
-                          fontFamily: "Instrument Sans, sans-serif",
-                          fontSize: 12,
-                          color: "#C4C5C7",
-                          marginTop: 10,
-                          letterSpacing: "-0.01em",
-                        }}
-                      >
+                      <p className="project-page-preview-caption">
                         Browse the preview above or{" "}
                         <a
                           href={preview.sourceUrl || preview.url}
                           target="_blank"
                           rel="noreferrer"
-                          style={{
-                            color: project.accent,
-                            textDecoration: "underline",
-                            textUnderlineOffset: 2,
-                          }}
+                          className="project-page-preview-link"
+                          style={{ color: project.accent }}
                         >
                           open this view in Figma
                         </a>

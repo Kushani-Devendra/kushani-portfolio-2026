@@ -62,7 +62,7 @@ export const ALL_PROJECTS: Project[] = [
     title: "Kapuli Mobile App",
     brief:
       "An offline-first travel journaling app designed for guides and tour operators to document experiences and recognize wildlife.",
-    tags: ["Mobile App", "Design System", "Offline-First"],
+    tags: ["Branding", "Design System", "Mobile Design"],
     category: "Mobile App",
     bg: "#1D1B18",
     accent: "#C8B89A",
@@ -71,7 +71,7 @@ export const ALL_PROJECTS: Project[] = [
     featured: true,
     client: "NimiDev",
     duration: "5 months",
-    role: "Requirement Analysis · Design System · Branding · Wireframing · Mobile Design · Prototyping",
+    role: "Branding · Design System · Wireframing · Mobile Design · Prototyping",
     overview:
       "Kapuli is a mobile app built for tour operators, guides, wildlife experiences, and outdoor journeys. It helps users capture travel experiences, create interactive journals, recognize wildlife, and document stories seamlessly—even in remote locations with limited connectivity. Designed with an offline-first experience, Kapuli combines storytelling, AI-powered recognition, and collaborative travel documentation into one connected platform.",
     challenge:
@@ -123,7 +123,7 @@ export const ALL_PROJECTS: Project[] = [
     title: "Library Management System",
     brief:
       "A banking-facing web application designed for streamlined library operations and clear content workflows.",
-    tags: ["Web App", "Enterprise UI"],
+    tags: ["Branding", "Design System", "Web App Design"],
     category: "Web App",
     bg: "#0F172A",
     accent: "#3B82F6",
@@ -132,7 +132,7 @@ export const ALL_PROJECTS: Project[] = [
     featured: true,
     client: "Commercial Bank of Ceylon PLC",
     duration: "1 month - ongoing",
-    role: "Requirement Analysis · Branding · Design System · Web App Design",
+    role: "Requirement Gathering · Branding · Design System · Web App Design",
     overview:
       "The Library Management System was a revamp designed for a complex internal workflow with a strong emphasis on clarity, structure, and maintainability.",
     challenge:
@@ -175,7 +175,7 @@ export const ALL_PROJECTS: Project[] = [
     title: "Prestige Elite Banking Website",
     brief:
       "A polished banking website experience for highlighting premium services and product versions.",
-    tags: ["Website", "Banking UI"],
+    tags: ["Website Design", "Prototyping"],
     category: "Website",
     bg: "#111827",
     accent: "#EAB308",
@@ -184,7 +184,7 @@ export const ALL_PROJECTS: Project[] = [
     featured: true,
     client: "Commercial Bank of Ceylon PLC",
     duration: "3 weeks",
-    role: "Web Design",
+    role: "Website Design, Prototyping",
     overview:
       "The Prestige Elite banking website focused on shaping a premium, trustworthy digital presence for a high-value banking audience.",
     challenge:
@@ -194,6 +194,7 @@ export const ALL_PROJECTS: Project[] = [
     outcome:
       "The project delivered a polished Figma reference for a responsive banking website experience with a clear design direction.",
     tools: ["Figma"],
+    thumbImage: "/prestige thumb.png",
     figmaLinks: [
       {
         label: "Design",
@@ -218,7 +219,7 @@ export const ALL_PROJECTS: Project[] = [
     title: "Neo Creative",
     brief:
       "A bold brand and e-commerce experience for a print studio with an editorial feel.",
-    tags: ["Branding", "Website"],
+    tags: ["Branding", "E-commerce Design"],
     category: "Website",
     bg: "#241A2E",
     accent: "#BF7FE0",
@@ -227,7 +228,7 @@ export const ALL_PROJECTS: Project[] = [
     featured: true,
     client: "Neo Creative",
     duration: "4 weeks",
-    role: "Brand Identity · Web Design",
+    role: "Branding · E-commerce Design",
     overview:
       "Neo Creative needed a clean, confident digital presence that could reflect a modern print studio while supporting product discovery and enquiries.",
     challenge:
@@ -236,7 +237,7 @@ export const ALL_PROJECTS: Project[] = [
       "I shaped a refined visual language with a distinctive brand system and a storytelling-driven website structure that guides visitors through the studio offering.",
     outcome:
       "The project was delivered as a complete Figma experience complete with brand direction and an e-commerce-ready website flow.",
-    tools: ["Figma", "Adobe Illustrator"],
+    tools: ["Figma"],
     thumbImage: "/neo-creative-thumb.png",
     figmaLinks: [
       {
@@ -254,7 +255,7 @@ export const ALL_PROJECTS: Project[] = [
     title: "A Taste of Heaven",
     brief:
       "A warm and appetising website for a cake-selling business with a strong food-first experience.",
-    tags: ["Website", "Food Branding"],
+    tags: ["Branding", "E-commerce Design"],
     category: "Website",
     bg: "#E8D8D1",
     accent: "#C96A45",
@@ -263,7 +264,7 @@ export const ALL_PROJECTS: Project[] = [
     featured: true,
     client: "A Taste of Heaven",
     duration: "4 weeks",
-    role: "Web Design · Brand Identity",
+    role: "Branding · E-commerce Design",
     overview:
       "A Taste of Heaven needed an online presence that felt warm, friendly and appetising while still being straightforward to use.",
     challenge:
@@ -273,6 +274,7 @@ export const ALL_PROJECTS: Project[] = [
     outcome:
       "The work was delivered as a simple yet polished web design concept ready for further development.",
     tools: ["Figma"],
+    liveUrl: "https://www.atasteofheaven.lk/",
     thumbImage: "/taste-of-heaven-thumb.png",
     figmaLinks: [
       {
@@ -285,12 +287,49 @@ export const ALL_PROJECTS: Project[] = [
       },
     ],
   },
+
+  {
+    id: "salon-zero",
+    title: "Salon Zero",
+    brief: "A premium booking experience for a modern hair and beauty salon.",
+    tags: ["Branding", "Website Design"],
+    category: "Website",
+    bg: "#2D211A",
+    accent: "#D8A570",
+    mockup: "desktop",
+    year: "2024",
+    featured: true,
+    client: "Salon Zero",
+    duration: "3 weeks",
+    role: "Branding · Website Design",
+    overview:
+      "Salon Zero needed an experience that felt premium and effortless for booking services, learning about the studio, and discovering styling offers.",
+    challenge:
+      "The app needed to communicate luxury while remaining approachable and easy to use for everyday bookings.",
+    solution:
+      "I designed a simple booking journey with a warm visual identity and a clear service discovery flow that feels calm from first tap to final confirmation.",
+    outcome:
+      "The work was shaped into a polished mobile concept with a strong brand-led experience and clear interaction patterns.",
+    tools: ["Figma"],
+    liveUrl: "https://www.salonzero.lk/",
+    thumbImage: "/salon zero thumb.png",
+    figmaLinks: [
+      {
+        label: "Design",
+        url: toEmbedUrl(
+          "https://www.figma.com/design/Fah00UoWWv2wnUxJlJxY3B/Salon-Zero--Public-?node-id=25-113&t=ZXWOkGi63mtIWDq0-1",
+        ),
+        sourceUrl:
+          "https://www.figma.com/design/Fah00UoWWv2wnUxJlJxY3B/Salon-Zero--Public-?node-id=25-113&t=ZXWOkGi63mtIWDq0-1",
+      },
+    ],
+  },
   {
     id: "subee-clothing",
     title: "Subee Clothing",
     brief:
       "An elegant e-commerce concept for a clothing brand with a soft, editorial voice.",
-    tags: ["E-commerce", "Branding"],
+    tags: ["Branding", "E-commerce Design"],
     category: "Website",
     bg: "#1F1A1A",
     accent: "#E8C4C4",
@@ -299,7 +338,7 @@ export const ALL_PROJECTS: Project[] = [
     featured: true,
     client: "Subee Clothing",
     duration: "4 weeks",
-    role: "Brand Identity · E-commerce Design",
+    role: "Branding · E-commerce Design",
     overview:
       "Subee Clothing needed a digital storefront that felt premium, feminine and approachable while keeping shopping simple.",
     challenge:
@@ -321,46 +360,11 @@ export const ALL_PROJECTS: Project[] = [
     ],
   },
   {
-    id: "salon-zero",
-    title: "Salon Zero",
-    brief: "A premium booking experience for a modern hair and beauty salon.",
-    tags: ["Website", "Branding"],
-    category: "Website",
-    bg: "#2D211A",
-    accent: "#D8A570",
-    mockup: "desktop",
-    year: "2024",
-    featured: true,
-    client: "Salon Zero",
-    duration: "3 weeks",
-    role: "Brand Identity · Website Design",
-    overview:
-      "Salon Zero needed an experience that felt premium and effortless for booking services, learning about the studio, and discovering styling offers.",
-    challenge:
-      "The app needed to communicate luxury while remaining approachable and easy to use for everyday bookings.",
-    solution:
-      "I designed a simple booking journey with a warm visual identity and a clear service discovery flow that feels calm from first tap to final confirmation.",
-    outcome:
-      "The work was shaped into a polished mobile concept with a strong brand-led experience and clear interaction patterns.",
-    tools: ["Figma"],
-    thumbImage: "/screens/salon-zero.png",
-    figmaLinks: [
-      {
-        label: "Design",
-        url: toEmbedUrl(
-          "https://www.figma.com/design/Fah00UoWWv2wnUxJlJxY3B/Salon-Zero--Public-?node-id=25-113&t=ZXWOkGi63mtIWDq0-1",
-        ),
-        sourceUrl:
-          "https://www.figma.com/design/Fah00UoWWv2wnUxJlJxY3B/Salon-Zero--Public-?node-id=25-113&t=ZXWOkGi63mtIWDq0-1",
-      },
-    ],
-  },
-  {
     id: "treasury-forex-portal",
     title: "Treasury Forex Trading Portal",
     brief:
       "An enterprise-grade trading interface with 200+ screens, a 20+ component design system, and WCAG 2.1 AA compliance.",
-    tags: ["Web App", "Enterprise UI", "React"],
+    tags: ["Design System", "Web App Design", "Frontend Development"],
     category: "Web App",
     bg: "#0C1A2E",
     accent: "#22D3EE",
@@ -369,7 +373,7 @@ export const ALL_PROJECTS: Project[] = [
     featured: false,
     client: "Commercial Bank of Ceylon PLC (via Orysys Ltd)",
     duration: "9 months",
-    role: "UI/UX Design · Frontend Development · Design System · Accessibility",
+    role: "Design System . Web App Design · Frontend Development ",
     overview:
       "I designed and built a complex forex trading portal for treasury operations from end to end, creating trading interfaces, portfolio dashboards, and transaction workflows across 200+ screens.",
     challenge:
@@ -385,7 +389,7 @@ export const ALL_PROJECTS: Project[] = [
     title: "OneApp Mobile Banking",
     brief:
       "A mobile banking super-app with 200+ screens streamlining 20+ core banking features into one intuitive experience.",
-    tags: ["Mobile App", "Banking UI", "React Native"],
+    tags: ["Mobile App Design", "Prototyping"],
     category: "Mobile App",
     bg: "#0F1F3D",
     accent: "#4F8EF7",
@@ -394,7 +398,7 @@ export const ALL_PROJECTS: Project[] = [
     featured: false,
     client: "Commercial Bank of Ceylon PLC (via Orysys Ltd)",
     duration: "7 months",
-    role: "UI/UX Design · Frontend Development · User Research",
+    role: "Mobile App Design, Prototyping",
     overview:
       "OneApp is a mobile banking super-app that brings 20+ core banking features into one cohesive mobile interface. I designed the screens and helped build them using React Native.",
     challenge:
@@ -410,7 +414,7 @@ export const ALL_PROJECTS: Project[] = [
     title: "E-Statement Portal",
     brief:
       "A complete UI overhaul replacing 100+ legacy vendor screens with a brand-aligned, accessible React component library.",
-    tags: ["Web App", "React", "Design System"],
+    tags: ["Web App Design", "Frontend Development"],
     category: "Web App",
     bg: "#111827",
     accent: "#34D399",
@@ -419,7 +423,7 @@ export const ALL_PROJECTS: Project[] = [
     featured: false,
     client: "Commercial Bank of Ceylon PLC (via Orysys Ltd)",
     duration: "4 months",
-    role: "UI/UX Design · Frontend Development · Mentoring",
+    role: "Web App Design · Frontend Development ",
     overview:
       "I led a full redesign of the bank's e-statement portal, replacing legacy vendor UI with custom, brand-aligned components and a maintainable React component library.",
     challenge:
@@ -435,7 +439,7 @@ export const ALL_PROJECTS: Project[] = [
     title: "IVIG Internal Portal",
     brief:
       "A full-stack prototype for an internal banking portal, designed in Figma and built with Next.js, Shadcn, and Tailwind CSS.",
-    tags: ["Web App", "Next.js", "Prototyping"],
+    tags: ["Wireframing", "Frontend Prototyping"],
     category: "Web App",
     bg: "#1A1A2E",
     accent: "#A78BFA",
@@ -444,7 +448,7 @@ export const ALL_PROJECTS: Project[] = [
     featured: false,
     client: "Commercial Bank of Ceylon PLC (via Orysys Ltd)",
     duration: "3 months",
-    role: "UI/UX Design · Frontend Prototyping · API Integration",
+    role: "Wireframing · Frontend Prototyping",
     overview:
       "I designed and prototyped an internal banking portal from scratch, translating complex business requirements into user journey diagrams, wireframes, and a working Next.js prototype.",
     challenge:
@@ -468,6 +472,7 @@ export const SKILLS = [
   "Design Systems",
   "Product Design",
   "Web Design",
+  "Frontend Development",
   "Mobile Design",
   "Figma",
 ];
@@ -500,14 +505,7 @@ export const SKILL_CATEGORIES = [
   },
   {
     label: "Tools",
-    items: [
-      "Figma",
-      "Storybook",
-      "Git",
-      "Material UI",
-      "Shadcn",
-      "Ant Design",
-    ],
+    items: ["Figma", "Storybook", "Git", "Material UI", "Shadcn", "Ant Design"],
   },
 ];
 

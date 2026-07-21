@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useLocation, Link } from "react-router-dom";
+import "./styles/navigation.css";
 
 // Nav used on non-hero pages (Work, Project detail) — always opaque, always fixed
 export function PageNav() {
   const location = useLocation();
+  const isHomeRoute = location.pathname === "/";
 
   return (
     <motion.nav
@@ -45,46 +47,33 @@ export function PageNav() {
           { label: "Home", to: "/" },
           { label: "Work", to: "/work" },
           { label: "Experience", to: "/experience" },
-        ].map(({ label, to }) => (
-          <Link
-            key={label}
-            to={to}
-            style={{
-              fontFamily: "Instrument Sans, sans-serif",
-              fontWeight: 300,
-              fontSize: 15,
-              color: "#2E2C29",
-              textDecoration: "none",
-              opacity: location.pathname === to ? 1 : 0.5,
-              transition: "opacity 0.2s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.opacity =
-                location.pathname === to ? "1" : "0.5")
-            }
-          >
-            {label}
-          </Link>
-        ))}
+        ].map(({ label, to }) => {
+          const isActive = location.pathname === to;
+          return (
+            <Link
+              key={label}
+              to={to}
+              style={{
+                fontFamily: "Instrument Sans, sans-serif",
+                fontWeight: 300,
+                fontSize: 15,
+                color: "#2E2C29",
+                textDecoration: "none",
+                opacity: isActive ? 1 : 0.5,
+                transition: "opacity 0.2s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.opacity = isActive ? "1" : "0.5")
+              }
+            >
+              {label}
+            </Link>
+          );
+        })}
         <Link
-          to="/#hire-me"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 7,
-            padding: "9px 22px",
-            borderRadius: 99,
-            background: "#2E2C29",
-            color: "#fff",
-            fontFamily: "Instrument Sans, sans-serif",
-            fontWeight: 500,
-            fontSize: 14,
-            textDecoration: "none",
-            transition: "background 0.22s",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = "#4A4845")}
-          onMouseLeave={(e) => (e.currentTarget.style.background = "#2E2C29")}
+          to={isHomeRoute ? "#hire-me" : "/#hire-me"}
+          className="nav-cta"
         >
           Hire me
         </Link>
@@ -96,6 +85,7 @@ export function PageNav() {
 // HeroNav — lives INSIDE the hero section, fixed positioned on home page
 export function HeroNav() {
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -149,51 +139,25 @@ export function HeroNav() {
           { label: "Home", to: "/" },
           { label: "Work", to: "/work" },
           { label: "Experience", to: "/experience" },
-        ].map(({ label, to }) => (
-          <Link
-            key={label}
-            to={to}
-            style={{
-              fontFamily: "Instrument Sans, sans-serif",
-              fontWeight: 300,
-              fontSize: 15,
-              color: "#2E2C29",
-              textDecoration: "none",
-              opacity: 0.6,
-              transition: "opacity 0.2s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.6")}
-          >
-            {label}
-          </Link>
-        ))}
+        ].map(({ label, to }) => {
+          const isActive = location.pathname === to;
+          return (
+            <Link
+              key={label}
+              to={to}
+              className={`nav-link ${isActive ? "nav-link--active" : "nav-link--inactive"}`}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.opacity = isActive ? "1" : "0.6")
+              }
+            >
+              {label}
+            </Link>
+          );
+        })}
         <Link
-          to="/#hire-me"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 7,
-            padding: "9px 22px",
-            borderRadius: 99,
-            background: "rgba(46,44,41,0.12)",
-            backdropFilter: "blur(8px)",
-            color: "#2E2C29",
-            fontFamily: "Instrument Sans, sans-serif",
-            fontWeight: 500,
-            fontSize: 14,
-            textDecoration: "none",
-            border: "1px solid rgba(46,44,41,0.12)",
-            transition: "all 0.22s",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "#2E2C29";
-            e.currentTarget.style.color = "#fff";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "rgba(46,44,41,0.12)";
-            e.currentTarget.style.color = "#2E2C29";
-          }}
+          to={location.pathname === "/" ? "#hire-me" : "/#hire-me"}
+          className="nav-cta"
         >
           Hire me
         </Link>

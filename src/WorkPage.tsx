@@ -132,36 +132,6 @@ function WorkCard({ project, index }: { project: Project; index: number }) {
           }}
         />
 
-        <div
-          style={{
-            position: "absolute",
-            bottom: 12,
-            left: 12,
-            display: "flex",
-            gap: 8,
-            flexWrap: "wrap",
-          }}
-        >
-          {project.tags.slice(0, 2).map((tag) => (
-            <span
-              key={tag}
-              style={{
-                fontFamily: "Instrument Sans, sans-serif",
-                fontSize: 10,
-                fontWeight: 600,
-                letterSpacing: "0.06em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.9)",
-                background: "rgba(0,0,0,0.34)",
-                backdropFilter: "blur(8px)",
-                padding: "4px 10px",
-                borderRadius: 999,
-              }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
       </div>
 
       <div

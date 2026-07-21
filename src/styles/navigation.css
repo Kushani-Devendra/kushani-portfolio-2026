@@ -1,0 +1,86 @@
+.nav-link {
+  font-family: "Instrument Sans", sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  color: #2e2c29;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  opacity: 1;
+}
+
+.nav-link--active {
+  opacity: 1;
+}
+
+.nav-link--inactive {
+  opacity: 0.6;
+}
+
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 22px;
+  border-radius: 99px;
+  background: #2e2c29;
+  color: #fff;
+  font-family: "Instrument Sans", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  border: 1px solid rgba(46, 44, 41, 0.12);
+  transition: background 0.22s, color 0.22s;
+}
+
+.nav-cta:hover,
+.nav-cta:focus-visible {
+  background: #4a4845;
+  color: #fff;
+}
+
+.hero-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: 99px;
+  background: #2e2c29;
+  color: #fff;
+  font-family: "Instrument Sans", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  text-decoration: none;
+  transition: background 0.25s;
+}
+
+.hero-cta-primary:hover,
+.hero-cta-primary:focus-visible {
+  background: #4a4845;
+}
+
+.hero-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: 99px;
+  border: 1.5px solid rgba(0, 0, 0, 0.18);
+  color: #2e2c29;
+  font-family: "Instrument Sans", sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.25s;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+}
+
+.hero-cta-secondary:hover,
+.hero-cta-secondary:focus-visible {
+  background: #2e2c29;
+  color: #fff;
+}

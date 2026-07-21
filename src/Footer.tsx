@@ -150,9 +150,7 @@ export default function Footer() {
                     textDecoration: "none",
                     transition: "opacity 0.2s",
                   }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.opacity = "0.45")
-                  }
+                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.45")}
                   onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
                 >
                   {link.label} ↗
@@ -218,7 +216,7 @@ export default function Footer() {
             color: "#4A4A4A",
           }}
         >
-          Design by Kushani Devendra · UI/UX Engineer
+          Design by Kushani Devendra
         </span>
       </div>
     </footer>
