@@ -204,7 +204,9 @@ function ExperienceCard({
       }}
     >
       {/* Header */}
-      <div style={{ padding: "28px 32px 0" }}>
+      <div
+        style={{ padding: "clamp(24px, 4vw, 28px) clamp(20px, 5vw, 32px) 0" }}
+      >
         <div
           style={{
             display: "flex",
@@ -282,7 +284,7 @@ function ExperienceCard({
       </div>
 
       {/* Projects accordion */}
-      <div style={{ padding: "20px 32px 28px" }}>
+      <div style={{ padding: "20px clamp(20px, 5vw, 32px) 28px" }}>
         <button
           onClick={() => setExpanded(!expanded)}
           data-cursor
@@ -331,7 +333,7 @@ function ExperienceCard({
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: pi * 0.05 }}
                 style={{
-                  padding: "18px 20px",
+                  padding: "clamp(14px, 3vw, 18px) clamp(16px, 3vw, 20px)",
                   background: "#FAF9F6",
                   borderRadius: 14,
                   border: "1px solid rgba(0,0,0,0.05)",
@@ -413,7 +415,12 @@ export default function ExperiencePage() {
       style={{ minHeight: "100vh", background: "#FAF9F6", color: "#2E2C29" }}
     >
       <div
-        style={{ maxWidth: 1100, margin: "0 auto", padding: "120px 32px 80px" }}
+        style={{
+          maxWidth: 1100,
+          margin: "0 auto",
+          // Clamped padding naturally shrinks for mobile devices
+          padding: "clamp(60px, 10vw, 120px) clamp(16px, 5vw, 32px) 80px",
+        }}
       >
         {/* Breadcrumb */}
         <div
@@ -453,9 +460,9 @@ export default function ExperiencePage() {
         {/* ── Hero cards: intro + strengths ── */}
         <div
           style={{
-            display: "grid",
+            display: "flex", // Replaced rigid CSS grid with responsive flex wrap
+            flexWrap: "wrap",
             gap: 20,
-            gridTemplateColumns: "1.3fr 0.7fr",
             marginBottom: 24,
           }}
         >
@@ -465,10 +472,12 @@ export default function ExperiencePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, ease: easeOut }}
             style={{
+              flex: "1.3 1 min(100%, 450px)", // Allows it to shrink to 100% on small screens
               background: "#fff",
               border: "1px solid rgba(0,0,0,0.06)",
               borderRadius: 24,
-              padding: "36px 36px 42px",
+              padding:
+                "clamp(24px, 4vw, 36px) clamp(24px, 4vw, 36px) clamp(32px, 5vw, 42px)",
             }}
           >
             <div
@@ -515,7 +524,8 @@ export default function ExperiencePage() {
             <div
               style={{
                 display: "flex",
-                gap: 32,
+                flexWrap: "wrap", // Added flex wrap for safety
+                gap: "clamp(16px, 4vw, 32px)",
                 marginTop: 28,
                 paddingTop: 24,
                 borderTop: "1px solid rgba(0,0,0,0.06)",
@@ -599,10 +609,11 @@ export default function ExperiencePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.1, ease: easeOut }}
             style={{
+              flex: "0.7 1 min(100%, 300px)", // Keeps aspect ratio but forces 100% stack on mobile
               background: "#2E2C29",
               color: "#fff",
               borderRadius: 24,
-              padding: "32px 28px",
+              padding: "clamp(24px, 4vw, 32px) clamp(20px, 4vw, 28px)",
               display: "flex",
               flexDirection: "column",
               gap: 20,
@@ -667,7 +678,13 @@ export default function ExperiencePage() {
 
         {/* ── Education + Awards row ── */}
         <div
-          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}
+          style={{
+            display: "grid",
+            // Responsive auto-fit Grid ensures 1 column on small screens and 2 on large screens
+            gridTemplateColumns:
+              "repeat(auto-fit, minmax(min(100%, 350px), 1fr))",
+            gap: 20,
+          }}
         >
           {/* Education */}
           <motion.section
@@ -678,7 +695,7 @@ export default function ExperiencePage() {
               background: "#fff",
               border: "1px solid rgba(0,0,0,0.06)",
               borderRadius: 24,
-              padding: "28px 28px 32px",
+              padding: "clamp(24px, 4vw, 28px) clamp(24px, 4vw, 28px) 32px",
             }}
           >
             <div
@@ -710,6 +727,7 @@ export default function ExperiencePage() {
                       alignItems: "flex-start",
                       gap: 12,
                       marginBottom: 6,
+                      flexWrap: "wrap", // Added flex wrap
                     }}
                   >
                     <div
@@ -770,7 +788,7 @@ export default function ExperiencePage() {
               background: "#fff",
               border: "1px solid rgba(0,0,0,0.06)",
               borderRadius: 24,
-              padding: "28px 28px 32px",
+              padding: "clamp(24px, 4vw, 28px) clamp(24px, 4vw, 28px) 32px",
             }}
           >
             <div

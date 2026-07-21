@@ -367,8 +367,39 @@
   text-underline-offset: 3px;
 }
 
+.project-page-more-projects {
+  background: #f9f8f6;
+  padding: 72px 72px 80px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .project-page-container {
+    padding: 60px 24px 56px;
+  }
+
+  .project-page-body {
+    padding: 0 24px 80px;
+  }
+
+  .project-page-body-grid.has-sections {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .project-page-toc {
+    position: static;
+    top: auto;
+    padding-top: 0;
+  }
+
+  .project-page-more-projects {
+    padding: 60px 24px 56px;
   }
 }

@@ -171,7 +171,7 @@ function RelatedCard({ project }: { project: Project }) {
           </div>
         )}
       </div>
-      <div className="project-page-related-tag">{project.tags[0]}</div>
+      {/* <div className="project-page-related-tag">{project.tags[0]}</div> */}
       <div className={`project-page-related-title ${hovered ? "hovered" : ""}`}>
         {project.title}
       </div>
@@ -829,13 +829,7 @@ export default function ProjectPage() {
       </div>
 
       {/* ── More projects ── */}
-      <div
-        style={{
-          background: "#F9F8F6",
-          padding: "72px 72px 80px",
-          borderTop: "1px solid rgba(0,0,0,0.06)",
-        }}
-      >
+      <div className="project-page-more-projects">
         <div
           style={{
             display: "flex",

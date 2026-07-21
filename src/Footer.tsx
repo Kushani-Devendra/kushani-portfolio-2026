@@ -28,12 +28,15 @@ export default function Footer() {
       ref={ref}
       style={{
         background: "#E7E7E3",
-        borderRadius: "56px 56px 0 0",
+        borderRadius: "clamp(24px, 5vw, 56px) clamp(24px, 5vw, 56px) 0 0",
         overflow: "hidden",
         marginTop: 0,
       }}
     >
-      <div style={{ padding: "88px 80px 0" }}>
+      {/* Fluid padding scales down safely on mobile devices */}
+      <div
+        style={{ padding: "clamp(48px, 8vw, 88px) clamp(16px, 6vw, 80px) 0" }}
+      >
         <motion.div
           variants={stagger}
           initial="hidden"
@@ -45,13 +48,16 @@ export default function Footer() {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "flex-start",
-              marginBottom: 72,
+              marginBottom: "clamp(40px, 8vw, 72px)",
               flexWrap: "wrap",
               gap: 32,
             }}
           >
             {/* Left: Location + contact */}
-            <motion.div variants={fadeUp}>
+            <motion.div
+              variants={fadeUp}
+              style={{ flex: "1 1 min(100%, 300px)" }}
+            >
               <div
                 style={{
                   fontFamily: "Instrument Sans, sans-serif",
@@ -91,6 +97,7 @@ export default function Footer() {
                   lineHeight: 1.2,
                   marginBottom: 4,
                   textDecoration: "none",
+                  wordBreak: "break-all",
                   transition: "color 0.2s",
                 }}
                 onMouseEnter={(e) =>
@@ -174,11 +181,13 @@ export default function Footer() {
             style={{
               fontFamily: "Instrument Sans, sans-serif",
               fontWeight: 700,
-              fontSize: "clamp(72px, 17vw, 260px)",
+              // Scaled down safely so it doesn't force a horizontal scrollbar on mobile
+              fontSize: "clamp(56px, 16vw, 260px)",
               letterSpacing: "-0.06em",
               color: "#2E2C29",
               lineHeight: 0.88,
               whiteSpace: "nowrap",
+              width: "100%",
               overflow: "hidden",
             }}
           >
@@ -193,7 +202,7 @@ export default function Footer() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "16px 80px 20px",
+          padding: "16px clamp(16px, 6vw, 80px) 20px",
           borderTop: "1px solid rgba(46,44,41,0.1)",
           marginTop: 16,
           flexWrap: "wrap",

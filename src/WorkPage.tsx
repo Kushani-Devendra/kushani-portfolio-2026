@@ -7,6 +7,9 @@ import Footer from "./Footer";
 
 const easeOut = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
+// Fluid horizontal padding to shrink naturally on mobile
+const paddingX = "clamp(20px, 5vw, 64px)";
+
 // ─── Category pill ────────────────────────────────────────────────────────────
 function FilterPill({
   label,
@@ -241,7 +244,7 @@ function WorkRow({ project, index }: { project: Project; index: number }) {
         padding: "20px 0",
         borderTop: "1px solid rgba(0,0,0,0.07)",
         cursor: "pointer",
-        gap: 20,
+        gap: "clamp(12px, 3vw, 20px)", // fluid gap
       }}
     >
       {/* Color swatch */}
@@ -272,7 +275,7 @@ function WorkRow({ project, index }: { project: Project; index: number }) {
       </motion.div>
 
       {/* Title */}
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: 1, minWidth: 100 }}>
         <span
           style={{
             fontFamily: "Instrument Sans, sans-serif",
@@ -281,14 +284,21 @@ function WorkRow({ project, index }: { project: Project; index: number }) {
             letterSpacing: "-0.03em",
             color: "#2E2C29",
             transition: "color 0.2s",
+            display: "block",
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
           }}
         >
           {project.title}
         </span>
       </div>
 
-      {/* Tags */}
-      <div style={{ display: "flex", gap: 8, flexShrink: 0 }}>
+      {/* Tags (Hidden on Mobile) */}
+      <div
+        className="mobile-hide"
+        style={{ display: "flex", gap: 8, flexShrink: 0 }}
+      >
         {project.tags.map((tag) => (
           <span
             key={tag}
@@ -307,8 +317,9 @@ function WorkRow({ project, index }: { project: Project; index: number }) {
         ))}
       </div>
 
-      {/* Category */}
+      {/* Category (Hidden on Mobile) */}
       <span
+        className="mobile-hide"
         style={{
           fontFamily: "Instrument Sans, sans-serif",
           fontSize: 13,
@@ -365,14 +376,30 @@ export default function WorkPage() {
       : ALL_PROJECTS.filter((p) => p.category === activeCategory);
 
   return (
-    <div style={{ minHeight: "100vh", background: "#fff" }}>
+    <div
+      style={{ minHeight: "100vh", background: "#fff", overflowX: "hidden" }}
+    >
+      {/* 
+        Injecting inline styles for media queries. 
+        This is the cleanest way to hide complex elements on mobile in standard React without external CSS. 
+      */}
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .mobile-hide {
+              display: none !important;
+            }
+          }
+        `}
+      </style>
+
       {/* Page header */}
       <div
         style={{
           paddingTop: 130,
           paddingBottom: 56,
-          paddingLeft: 64,
-          paddingRight: 64,
+          paddingLeft: paddingX,
+          paddingRight: paddingX,
         }}
       >
         <motion.div
@@ -421,6 +448,7 @@ export default function WorkPage() {
               display: "flex",
               alignItems: "flex-end",
               justifyContent: "space-between",
+              flexWrap: "wrap", // Allows toggles to fall below text on small screens
               gap: 24,
               marginBottom: 40,
             }}
@@ -430,7 +458,7 @@ export default function WorkPage() {
                 style={{
                   fontFamily: "Instrument Serif, serif",
                   fontWeight: 400,
-                  fontSize: "clamp(48px, 6vw, 80px)",
+                  fontSize: "clamp(48px, 10vw, 80px)", // Scaled down slightly for mobile
                   letterSpacing: "-0.04em",
                   color: "#2E2C29",
                   lineHeight: 1,
@@ -443,7 +471,7 @@ export default function WorkPage() {
                 style={{
                   fontFamily: "Instrument Sans, sans-serif",
                   fontWeight: 300,
-                  fontSize: 17,
+                  fontSize: "clamp(15px, 3vw, 17px)",
                   color: "#9FA0A3",
                   letterSpacing: "-0.01em",
                   lineHeight: 1.5,
@@ -574,14 +602,19 @@ export default function WorkPage() {
 
       {/* Divider */}
       <div
-        style={{ height: 1, background: "rgba(0,0,0,0.07)", margin: "0 64px" }}
+        style={{
+          height: 1,
+          background: "rgba(0,0,0,0.07)",
+          marginLeft: paddingX,
+          marginRight: paddingX,
+        }}
       />
 
       {/* Project count line */}
       <motion.div
         layout
         style={{
-          padding: "16px 64px",
+          padding: `16px ${paddingX}`,
           fontFamily: "Instrument Sans, sans-serif",
           fontSize: 13,
           color: "#9FA0A3",
@@ -593,7 +626,7 @@ export default function WorkPage() {
       </motion.div>
 
       {/* Content */}
-      <div style={{ padding: "0 64px 100px" }}>
+      <div style={{ padding: `0 ${paddingX} 100px` }}>
         <AnimatePresence mode="wait">
           {viewMode === "grid" ? (
             <motion.div
@@ -605,7 +638,9 @@ export default function WorkPage() {
               className="work-grid"
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
+                // This magic string handles responsive grids without media queries!
+                gridTemplateColumns:
+                  "repeat(auto-fill, minmax(min(100%, 300px), 1fr))",
                 gap: 24,
               }}
             >
@@ -627,7 +662,7 @@ export default function WorkPage() {
               <div
                 style={{
                   display: "flex",
-                  gap: 20,
+                  gap: "clamp(12px, 3vw, 20px)",
                   padding: "0 0 12px",
                   borderBottom: "1px solid rgba(0,0,0,0.07)",
                   fontFamily: "Instrument Sans, sans-serif",
@@ -639,9 +674,14 @@ export default function WorkPage() {
                 }}
               >
                 <div style={{ width: 44, flexShrink: 0 }} />
-                <div style={{ flex: 1 }}>Project</div>
-                <div>Tags</div>
-                <div style={{ width: 130, textAlign: "right" }}>Category</div>
+                <div style={{ flex: 1, minWidth: 100 }}>Project</div>
+                <div className="mobile-hide">Tags</div>
+                <div
+                  className="mobile-hide"
+                  style={{ width: 130, textAlign: "right" }}
+                >
+                  Category
+                </div>
                 <div style={{ width: 40, textAlign: "right" }}>Year</div>
                 <div style={{ width: 20 }} />
               </div>

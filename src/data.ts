@@ -472,7 +472,7 @@ export const SKILLS = [
   "Design Systems",
   "Web Design",
   "Mobile Design",
-  "Protyping",
+  "Prototyping",
   "Frontend Development",
 ];
 
