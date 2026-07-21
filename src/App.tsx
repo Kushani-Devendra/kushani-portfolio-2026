@@ -35,7 +35,7 @@ const fadeUp: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: easeOut } },
 };
 
-// We use a RAF loop to update cursor position directly on DOM for performance
+// Cursor tracker RAF loop
 function CursorTracker() {
   useEffect(() => {
     const dot = document.getElementById("cursor-dot");
@@ -55,9 +55,7 @@ function CursorTracker() {
     window.addEventListener("mousemove", onMove);
 
     const tick = () => {
-      // Dot snaps to cursor — centred via -4px (half of 8px)
       dot.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
-      // Ring lerps — read actual half-size for perfect centering regardless of CSS transition
       rx += (mx - rx) * 0.16;
       ry += (my - ry) * 0.16;
       const rw = ring.offsetWidth;
@@ -77,8 +75,20 @@ function CursorTracker() {
 
 function Cursor() {
   const [hovered, setHovered] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
+    // Disable custom cursor on mobile/touch devices
+    const isTouch =
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      window.matchMedia("(pointer: coarse)").matches;
+
+    if (isTouch) {
+      setIsTouchDevice(true);
+      return;
+    }
+
     document.body.style.cursor = "none";
     const over = (e: MouseEvent) => {
       setHovered(
@@ -91,6 +101,8 @@ function Cursor() {
       window.removeEventListener("mouseover", over);
     };
   }, []);
+
+  if (isTouchDevice) return null;
 
   return (
     <>
@@ -112,7 +124,7 @@ function Cursor() {
           willChange: "transform",
         }}
       />
-      {/* Ring — offset via CSS var set in RAF, size via transition */}
+      {/* Ring */}
       <div
         id="cursor-ring"
         style={{
@@ -137,7 +149,6 @@ function Cursor() {
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 function Hero() {
   const { scrollY } = useScroll();
-  // Parallax on the section's background-position
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -160,15 +171,15 @@ function Hero() {
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        // Hero image as CSS background — no child div
         backgroundImage: "url(/hero-bg.png)",
         backgroundSize: "cover",
         backgroundPosition: "center 45%",
         backgroundAttachment: "scroll",
+        overflow: "hidden",
       }}
     >
       <HeroNav />
-      {/* Veil overlay — heavier at bottom */}
+      {/* Veil overlay */}
       <div
         style={{
           position: "absolute",
@@ -204,7 +215,7 @@ function Hero() {
         <rect width="100%" height="100%" filter="url(#grain)" />
       </svg>
 
-      {/* Main centred content — takes full height minus ticker */}
+      {/* Main content area */}
       <motion.div
         style={{
           opacity: heroOpacity,
@@ -215,8 +226,11 @@ function Hero() {
           justifyContent: "center",
           position: "relative",
           zIndex: 5,
-          padding: "120px 40px 80px",
+          padding:
+            "clamp(100px, 15vh, 140px) clamp(20px, 5vw, 40px) clamp(40px, 8vh, 80px)",
           textAlign: "center",
+          width: "100%",
+          boxSizing: "border-box",
         }}
       >
         <motion.div
@@ -227,7 +241,8 @@ function Hero() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 28,
+            gap: "clamp(18px, 4vw, 28px)",
+            width: "100%",
           }}
         >
           <motion.h1
@@ -235,8 +250,8 @@ function Hero() {
             style={{
               fontFamily: "Instrument Serif, serif",
               fontWeight: 400,
-              fontSize: "clamp(44px, 6.5vw, 88px)",
-              lineHeight: 1.0,
+              fontSize: "clamp(36px, 7.5vw, 88px)",
+              lineHeight: 1.05,
               color: "#2E2C29",
               maxWidth: 860,
               letterSpacing: "-0.025em",
@@ -256,8 +271,8 @@ function Hero() {
             style={{
               fontFamily: "Instrument Sans, sans-serif",
               fontWeight: 300,
-              fontSize: "clamp(16px, 1.7vw, 22px)",
-              lineHeight: 1.65,
+              fontSize: "clamp(15px, 2vw, 22px)",
+              lineHeight: 1.6,
               color: "#5C5A56",
               maxWidth: 620,
             }}
@@ -267,7 +282,16 @@ function Hero() {
             that ship.
           </motion.p>
 
-          <motion.div variants={fadeUp} style={{ display: "flex", gap: 14 }}>
+          <motion.div
+            variants={fadeUp}
+            style={{
+              display: "flex",
+              gap: 12,
+              flexWrap: "wrap",
+              justifyContent: "center",
+              width: "100%",
+            }}
+          >
             <a href="#hire-me" data-cursor className="hero-cta-primary">
               Hire me
               <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
@@ -286,7 +310,7 @@ function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Scroll indicator — below buttons, inside content area, not overlapping ticker */}
+        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -296,7 +320,7 @@ function Hero() {
             flexDirection: "column",
             alignItems: "center",
             gap: 10,
-            marginTop: 64,
+            marginTop: "clamp(32px, 6vh, 64px)",
           }}
         >
           <span
@@ -321,14 +345,11 @@ function Hero() {
   );
 }
 
-// ─── Client Belt — separate section below hero ────────────────────────────────
-// ─── Client Marquee — faizur-inspired logo strip ─────────────────────────────
-// Pill-tag style marquee, two rows scrolling in opposite directions
+// ─── Client Belt ─────────────────────────────────────────────────────────────
 function ClientBelt() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
 
-  // Split clients into two rows for a staggered look
   const row1 = CLIENTS;
   const row2 = [...CLIENTS].reverse();
 
@@ -384,7 +405,6 @@ function ClientBelt() {
         position: "relative",
       }}
     >
-      {/* Header row */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
@@ -403,14 +423,14 @@ function ClientBelt() {
         Worked with
       </motion.div>
 
-      {/* Edge fade masks */}
+      {/* Responsive edge fade masks */}
       <div
         style={{
           position: "absolute",
           top: 0,
           left: 0,
           bottom: 0,
-          width: 100,
+          width: "clamp(30px, 8vw, 100px)",
           zIndex: 2,
           background: "linear-gradient(90deg, #F5F4F0 0%, transparent 100%)",
           pointerEvents: "none",
@@ -422,7 +442,7 @@ function ClientBelt() {
           top: 0,
           right: 0,
           bottom: 0,
-          width: 100,
+          width: "clamp(30px, 8vw, 100px)",
           zIndex: 2,
           background: "linear-gradient(270deg, #F5F4F0 0%, transparent 100%)",
           pointerEvents: "none",
@@ -437,15 +457,13 @@ function ClientBelt() {
   );
 }
 
-// ─── Thumb card — faizur-inspired: image + info below ─────────────────────────
+// ─── Thumb card ──────────────────────────────────────────────────────────────
 function ThumbCard({
   project,
   delay = 0,
-  imgHeight = 400,
 }: {
   project: Project;
   delay?: number;
-  imgHeight?: number;
 }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -467,15 +485,16 @@ function ThumbCard({
         display: "flex",
         flexDirection: "column",
         gap: 0,
+        width: "100%",
       }}
     >
-      {/* ── Image ── */}
+      {/* ── Image Container (Fluid Height) ── */}
       <div
         style={{
           position: "relative",
           borderRadius: 16,
           overflow: "hidden",
-          height: imgHeight,
+          height: "clamp(260px, 40vh, 420px)",
           background: project.bg,
           transition: "box-shadow 0.4s ease",
           boxShadow: hovered
@@ -503,11 +522,10 @@ function ThumbCard({
             transition={{ duration: 0.6, ease: easeOut }}
             style={{ height: "100%" }}
           >
-            <ProjectThumbnail project={project} height={imgHeight} />
+            <ProjectThumbnail project={project} height={420} />
           </motion.div>
         )}
 
-        {/* Dark veil on hover */}
         <motion.div
           animate={{ opacity: hovered ? 1 : 0 }}
           transition={{ duration: 0.25 }}
@@ -519,7 +537,7 @@ function ThumbCard({
           }}
         />
 
-        {/* Arrow — top right */}
+        {/* Arrow */}
         <motion.div
           animate={{
             x: hovered ? 0 : 12,
@@ -552,60 +570,28 @@ function ThumbCard({
             />
           </svg>
         </motion.div>
-
-        {/* Category pill — bottom left */}
-        {/* <div
-          style={{
-            position: "absolute",
-            bottom: 14,
-            left: 14,
-            display: "flex",
-            gap: 6,
-          }}
-        >
-          {project.tags.slice(0, 2).map((tag) => (
-            <span
-              key={tag}
-              style={{
-                fontFamily: "Instrument Sans, sans-serif",
-                fontSize: 10,
-                fontWeight: 600,
-                letterSpacing: "0.06em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.85)",
-                background: "rgba(0,0,0,0.3)",
-                backdropFilter: "blur(8px)",
-                padding: "4px 10px",
-                borderRadius: 99,
-              }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div> */}
       </div>
 
       {/* ── Info below ── */}
       <div
         style={{
-          padding: "20px 2px 8px",
+          padding: "16px 2px 8px",
           display: "flex",
           alignItems: "flex-start",
           justifyContent: "space-between",
-          gap: 16,
+          gap: 12,
         }}
       >
         <div style={{ flex: 1, minWidth: 0 }}>
-          {/* Title */}
           <div
             style={{
               fontFamily: "Instrument Serif, serif",
               fontWeight: 400,
-              fontSize: "clamp(18px, 2vw, 24px)",
+              fontSize: "clamp(20px, 3.5vw, 24px)",
               letterSpacing: "-0.03em",
               color: "#2E2C29",
               lineHeight: 1.2,
-              marginBottom: 8,
+              marginBottom: 6,
               transition: "color 0.2s",
             }}
           >
@@ -624,14 +610,13 @@ function ThumbCard({
             )}
           </div>
 
-          {/* Brief */}
           {project.brief && (
             <div
               style={{
                 fontFamily: "Instrument Sans, sans-serif",
                 fontWeight: 300,
                 fontSize: 14,
-                lineHeight: 1.65,
+                lineHeight: 1.55,
                 color: "#8A8885",
                 letterSpacing: "-0.01em",
               }}
@@ -641,7 +626,6 @@ function ThumbCard({
           )}
         </div>
 
-        {/* Year */}
         <span
           style={{
             fontFamily: "Instrument Sans, sans-serif",
@@ -656,25 +640,11 @@ function ThumbCard({
           {project.year}
         </span>
       </div>
-
-      {/* Bottom border line — animates on hover */}
-      {/* <motion.div
-        animate={{ scaleX: hovered ? 1 : 0 }}
-        initial={{ scaleX: 0 }}
-        transition={{ duration: 0.4, ease: easeOut }}
-        style={{
-          height: 1.5,
-          background: `linear-gradient(90deg, ${project.accent}, transparent)`,
-          transformOrigin: "left",
-          borderRadius: 99,
-          marginTop: 4,
-        }}
-      /> */}
     </motion.div>
   );
 }
 
-// ─── Work Section — clean 2-col, faizur-inspired ──────────────────────────────
+// ─── Work Section ─────────────────────────────────────────────────────────────
 function WorkSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -683,9 +653,12 @@ function WorkSection() {
   return (
     <section
       id="selected-work"
-      style={{ padding: "100px 72px", background: "#fff" }}
+      style={{
+        padding: "clamp(60px, 8vw, 100px) clamp(20px, 5vw, 72px)",
+        background: "#fff",
+      }}
     >
-      {/* ── Header ── */}
+      {/* Header */}
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 20 }}
@@ -695,8 +668,8 @@ function WorkSection() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "flex-end",
-          marginBottom: 56,
-          paddingBottom: 32,
+          marginBottom: "clamp(32px, 5vw, 56px)",
+          paddingBottom: 24,
           borderBottom: "1px solid rgba(0,0,0,0.07)",
         }}
       >
@@ -709,7 +682,7 @@ function WorkSection() {
               letterSpacing: "0.1em",
               textTransform: "uppercase",
               color: "#9FA0A3",
-              marginBottom: 12,
+              marginBottom: 10,
             }}
           >
             / Selected Work
@@ -718,7 +691,7 @@ function WorkSection() {
             style={{
               fontFamily: "Instrument Serif, serif",
               fontWeight: 400,
-              fontSize: "clamp(32px, 3.8vw, 52px)",
+              fontSize: "clamp(32px, 5vw, 52px)",
               letterSpacing: "-0.04em",
               color: "#2E2C29",
               lineHeight: 1,
@@ -729,30 +702,30 @@ function WorkSection() {
         </div>
       </motion.div>
 
-      {/* ── 2-column grid ── */}
+      {/* Fluid auto-responsive grid */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "28px 40px",
+          gridTemplateColumns:
+            "repeat(auto-fit, minmax(min(100%, 340px), 1fr))",
+          gap: "clamp(28px, 4vw, 40px)",
         }}
       >
         {projects.map((p, i) => (
-          <ThumbCard
-            key={p.id}
-            project={p}
-            delay={0.05 + (i % 2) * 0.07}
-            imgHeight={420}
-          />
+          <ThumbCard key={p.id} project={p} delay={0.05 + (i % 2) * 0.07} />
         ))}
       </div>
 
-      {/* ── View more CTA ── */}
+      {/* View more CTA */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.55, delay: 0.4, ease: easeOut }}
-        style={{ display: "flex", justifyContent: "center", marginTop: 64 }}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "clamp(40px, 6vw, 64px)",
+        }}
       >
         <a
           href="/work"
@@ -810,11 +783,19 @@ function SkillsSection() {
   return (
     <section
       id="experience"
-      style={{ padding: "80px 80px", background: "#fff" }}
+      style={{
+        padding: "clamp(50px, 8vw, 80px) clamp(20px, 5vw, 80px)",
+        background: "#fff",
+      }}
     >
       <div
         ref={ref}
-        style={{ display: "flex", gap: 80, alignItems: "flex-start" }}
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "clamp(32px, 6vw, 80px)",
+          alignItems: "flex-start",
+        }}
       >
         <motion.div
           initial={{ opacity: 0, x: -24 }}
@@ -822,17 +803,18 @@ function SkillsSection() {
           transition={{ duration: 0.6 }}
           style={{
             fontFamily: "Instrument Serif, serif",
-            fontSize: 48,
+            fontSize: "clamp(36px, 5vw, 48px)",
             letterSpacing: "-0.04em",
             color: "#2E2C29",
             lineHeight: 1,
             flexShrink: 0,
-            paddingTop: 12,
+            paddingTop: 8,
           }}
         >
           Focus
         </motion.div>
-        <div style={{ flex: 1 }}>
+
+        <div style={{ flex: "1 1 300px", minWidth: 0 }}>
           {SKILLS.map((skill, i) => {
             const isHovered = hoveredSkill === skill;
             return (
@@ -845,18 +827,19 @@ function SkillsSection() {
                 onMouseLeave={() => setHoveredSkill(null)}
                 style={{
                   borderTop: "1px solid rgba(0,0,0,0.07)",
-                  padding: "16px 0",
+                  padding: "clamp(12px, 2.5vw, 16px) 0",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
                   cursor: "default",
+                  gap: 12,
                 }}
               >
                 <span
                   style={{
                     fontFamily: "Instrument Sans, sans-serif",
                     fontWeight: 700,
-                    fontSize: "clamp(36px, 5vw, 72px)",
+                    fontSize: "clamp(28px, 5.5vw, 72px)",
                     letterSpacing: "-0.04em",
                     color: isHovered ? "#C8B89A" : "#2E2C29",
                     lineHeight: 1.05,
@@ -867,8 +850,9 @@ function SkillsSection() {
                 </span>
                 <span
                   style={{
-                    fontSize: 20,
+                    fontSize: "clamp(16px, 2vw, 20px)",
                     color: isHovered ? "#C8B89A" : "#9FA0A3",
+                    flexShrink: 0,
                   }}
                 >
                   ↗
@@ -886,7 +870,7 @@ function SkillsSection() {
 // ─── Home page ─────────────────────────────────────────────────────────────────
 function HomePage() {
   return (
-    <main>
+    <main style={{ overflowX: "hidden" }}>
       <Hero />
       <ClientBelt />
       <WorkSection />
@@ -896,7 +880,7 @@ function HomePage() {
   );
 }
 
-// Show PageNav on all pages except home (home has HeroNav inside)
+// PageNav Wrapper
 function PageNavWrapper() {
   const { pathname } = useLocation();
   if (pathname === "/") return null;
